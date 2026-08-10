@@ -1,7 +1,7 @@
 ---
 title: Executable Task Template
 document_id: AGENT-TASK-001
-version: 1.0
+version: 1.1
 status: approved-template
 language: en-US
 last_updated: 2026-08-10
@@ -9,7 +9,7 @@ scope:
   - validated executable delivery tasks
   - bounded implementation contracts
   - execution and review traceability
-authority_note: A published validated task authorizes only the implementation scope explicitly defined by the task and applicable repository authority. It does not override higher-order authority, repository policy, or observed repository evidence.
+authority_note: A published validated task authorizes only the bounded implementation scope explicitly defined by the task and applicable approved repository authority. Observed repository evidence governs claims about current implementation reality but does not silently redefine the task or its intended authority.
 ---
 
 # Executable Task
@@ -28,8 +28,16 @@ A task is not a generic coding recipe. Implementation technique remains the Exec
 **Task path:**  
 `<relative path to this task file>`
 
-**Task status:**  
-`<Draft | Validated/Published | In Execution | Review Required | Remediation Required | Accepted>`
+**Task contract state:**  
+`<Draft | Validated/Published>`
+
+The task file is the executable delivery contract.
+
+Execution and review lifecycle states such as `In Execution`, `Review Required`, `Remediation Required`, and `Accepted` SHOULD normally be tracked by orchestration, review records, repository metadata, or another mechanism that preserves the exact governing task revision.
+
+A lifecycle-status update MUST NOT silently replace the immutable task revision that governed an execution attempt.
+
+When remediation materially changes this executable contract, edit the same stable task path, return it to Draft as needed, and republish it as a new immutable governing task revision before renewed execution.
 
 **Delivery objective / Work Package / MVP:**  
 `<identifier or description>`
@@ -51,15 +59,23 @@ Keep this concise and traceable to approved authority.
 `<immutable repository revision>`
 
 **Task revision:**  
-`<immutable task-content revision, or "resolved when published">`
+`<exact immutable task-content revision, or "resolved when published" while Draft only>`
 
-For Git repositories, the preferred task identity after publication is:
+`resolved when published` is a Draft placeholder. It is not sufficient for T5.
+
+Before this task is treated as `Validated/Published` or handed to an Executor, the exact immutable governing task revision MUST be resolvable.
+
+For Git repositories, the preferred published task identity is:
 
 ```text
 <task path> @ <full Git commit SHA containing the governing task content>
 ```
 
-The implementation baseline and task revision are separate references.
+The immutable revision MAY be supplied externally by version-control history, publication metadata, Planner handoff, runtime metadata, or another repository-approved immutable content-identity mechanism. The task body does not need to embed the commit SHA that contains itself.
+
+If establishing the immutable published task revision requires an otherwise unauthorized commit, publication, or other side effect, stop for the applicable authorization. Do not claim the task is Validated/Published while its governing revision remains unresolved.
+
+The implementation baseline and governing task revision are separate references.
 
 Do not change the implementation baseline silently during execution.
 
@@ -118,6 +134,13 @@ If required authority is Draft, unresolved, contradictory, or unapproved, this t
 - `<explicitly excluded behavior, subsystem, refactor, migration, or operational action>`
 - `<explicit exclusion>`
 
+### Preserved behavior
+
+List behavior, compatibility, contracts, data properties, or repository boundaries that MUST remain unchanged where material.
+
+- `<preserved behavior or invariant>`
+- `<preserved behavior or invariant>`
+
 Preserve unrelated behavior.
 
 Do not expand scope merely because adjacent improvements are technically convenient.
@@ -132,9 +155,29 @@ For parallel tasks, document overlapping files, shared resources, sequencing req
 
 ### Approved assumptions
 
-- `<assumption explicitly supported by authority or verified repository evidence>`
+- `<assumption explicitly supported by approved authority or verified repository evidence>`
+
+Observed repository evidence MAY support assumptions about current implementation reality. Such evidence does not become intended authority merely because it supports the assumption.
 
 Do not convert unresolved product, requirement, architecture, safety, acceptance, or scope decisions into implementation assumptions.
+
+### Remaining approval requirements
+
+Record approvals that still apply after task publication.
+
+Examples MAY include:
+
+- designated human approval before a particular side effect;
+- security or privacy approval;
+- migration or data-operation approval;
+- external-system authorization;
+- release or deployment approval;
+- another repository-specific approval boundary.
+
+- `<approval requirement, owner/authority, and trigger>`
+- `<approval requirement, or "None beyond the task's existing authority">`
+
+A remaining approval requirement MUST be explicit enough that the Executor knows when to stop rather than silently cross the boundary.
 
 ## Required capabilities
 
@@ -276,14 +319,16 @@ The Executor's implementation phase SHOULD end in one of these states:
 
 ### Review Required
 
-Use when implementation is complete enough for Reviewer evaluation.
+Use when a reviewable implementation state and truthful verification evidence are available for Reviewer evaluation.
 
 Expected evidence:
 
-- exact implementation revision or state;
+- exact implementation revision or precisely identified working-tree state;
 - verification results;
 - deviations and known gaps;
 - unresolved non-blocking observations.
+
+A mutable working-tree state MAY be sufficient for V7 evaluation when repository policy permits it, but A9 acceptance requires an immutable accepted implementation revision.
 
 ### Planning Required
 
@@ -324,7 +369,9 @@ A remediation update MAY add a concise section such as:
 - `<verification required for remediation>`
 ```
 
-The updated task MUST receive a new immutable task revision before renewed execution.
+The updated executable contract MUST receive a new immutable governing task revision before renewed execution.
+
+A status-only review record or lifecycle transition MUST NOT be treated as a new governing task revision.
 
 Materially new objectives, unrelated findings, or scope expansion MUST return to Delivery Planning and become separate task work.
 

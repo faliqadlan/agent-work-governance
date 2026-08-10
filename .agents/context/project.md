@@ -1,7 +1,7 @@
 ---
 title: Repository Context Template
 document_id: AGENT-CONTEXT-001
-version: 1.0
+version: 1.1
 status: approved-template
 language: en-US
 last_updated: 2026-08-10
@@ -10,7 +10,7 @@ scope:
   - repository authority mapping
   - delivery-state orientation
   - scoped-context routing
-authority_note: This file is supporting, refreshable repository context. It does not replace authoritative business, product, requirement, architecture, implementation, test, version-control, CI, or release artifacts.
+authority_note: This file is supporting, refreshable repository context. Approved repository authority governs intended behavior. Observed repository evidence governs claims about current implementation reality. Neither silently overrides the other, and this context replaces neither.
 ---
 
 # Repository Context
@@ -67,9 +67,9 @@ Record only information that materially affects planning, execution, review, or 
 
 Existing repositories MUST reuse valid artifacts and implementation evidence rather than recreating workflow artifacts solely to conform to this template.
 
-## Authority map
+## Intended authority map
 
-Map the logical responsibilities defined by `.agents/software-workflow.md` to the actual authoritative sources used by this repository.
+Map the intended-authority responsibilities defined by `.agents/software-workflow.md` to the actual approved sources used by this repository.
 
 Physical file locations and artifact structure are repository-defined.
 
@@ -104,6 +104,36 @@ Physical file locations and artifact structure are repository-defined.
 Do not duplicate authoritative artifacts when references are sufficient.
 
 If an authority-bearing artifact does not yet exist, record that absence rather than silently substituting agent-generated assumptions.
+
+## Observed implementation evidence map
+
+Map the repository evidence used to establish what currently exists, what changed, and what has actually been verified.
+
+Relevant evidence MAY include:
+
+### Source and configuration
+
+- `<source roots, configuration, generated-code boundaries, or other implementation references>`
+
+### Data and migrations
+
+- `<migration locations, schema sources, persistence definitions, or equivalent>`
+
+### Tests and verification
+
+- `<test locations, verification commands, fixtures, integration evidence, or equivalent>`
+
+### Version control and CI
+
+- `<Git repository/history reference, CI workflows, status checks, or equivalent>`
+
+### Runtime and operational evidence
+
+- `<runtime observations, logs, deployed-state evidence, external-system evidence, or equivalent when applicable>`
+
+Observed evidence MUST NOT be treated as intended authority merely because it reflects current behavior.
+
+Approved intended authority MUST NOT be treated as proof that observed implementation already conforms.
 
 ## Top-level architecture and boundaries
 
@@ -177,26 +207,42 @@ This section is an orientation summary, not a replacement for authoritative deli
 
 Record only gates that have been verified from repository evidence.
 
+Use the canonical gate states from `.agents/software-workflow.md`:
+
+`pending`, `in_review`, `blocked`, `passed`, `reopened`, or `not_applicable` with recorded rationale.
+
+If a gate has not yet been reliably assessed, record that fact outside the canonical gate-state value rather than inventing a new gate state.
+
 | Gate | Status | Evidence / authority |
 |---|---|---|
-| B0 — Business Framing | `<passed | in-review | blocked | not-applicable | unknown>` | `<reference>` |
-| P1 — Product Definition | `<status>` | `<reference>` |
-| R2 — Requirements | `<status>` | `<reference>` |
-| A3 — Architecture | `<status>` | `<reference>` |
-| D4 — Delivery Planning | `<status>` | `<reference>` |
-| T5 — Task Readiness | `<status>` | `<reference>` |
-| E6 — Execution Verification | `<status>` | `<reference>` |
-| V7 — Review | `<status>` | `<reference>` |
-| R8 — Remediation | `<status>` | `<reference>` |
-| A9 — Acceptance | `<status>` | `<reference>` |
-| G10 — Release | `<status>` | `<reference>` |
+| B0 — Business Framing | `<pending | in_review | blocked | passed | reopened | not_applicable>` | `<reference or rationale>` |
+| P1 — Product Definition | `<status>` | `<reference or rationale>` |
+| R2 — Requirements Traceability | `<status>` | `<reference or rationale>` |
+| A3 — Architecture Clarity | `<status>` | `<reference or rationale>` |
+| D4 — Delivery Readiness | `<status>` | `<reference or rationale>` |
+| T5 — Task Readiness | `<status>` | `<reference or rationale>` |
+| E6 — Execution Verification | `<status>` | `<reference or rationale>` |
+| V7 — Implementation Review | `<status>` | `<reference or rationale>` |
+| R8 — Remediation Closure | `<status>` | `<reference or rationale>` |
+| A9 — Baseline Acceptance | `<status>` | `<reference or rationale>` |
+| G10 — Release Approval | `<status>` | `<reference or rationale>` |
 
 **Earliest unmet or materially unreliable gate:**  
 `<gate-id and reason>`
 
 ### Active task(s)
 
-- `<task path and, when available, immutable task revision>`
+For Draft planning work, the immutable publication revision MAY still be unresolved.
+
+Any task recorded as `Validated/Published`, `In Execution`, `Review Required`, or `Remediation Required` MUST identify the exact immutable governing task revision.
+
+Preferred Git-backed identity:
+
+```text
+<task path> @ <full Git commit SHA containing the governing task content>
+```
+
+- `<task identity, lifecycle state, and governing immutable revision when required>`
 
 ### Blocking items
 
@@ -209,6 +255,8 @@ Non-blocking items should remain visible only when they materially affect downst
 Record the current accepted immutable repository revision.
 
 For Git repositories, prefer the full commit SHA.
+
+If no accepted baseline can be reliably established, record `unknown` explicitly and treat the uncertainty according to its delivery impact. Do not invent or infer an accepted baseline from the current branch tip alone.
 
 **Accepted baseline:**  
 `<immutable repository revision>`

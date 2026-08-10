@@ -1,7 +1,7 @@
 ---
 title: Repository AI Delivery Contract
 document_id: AGENTS-CONTRACT-001
-version: 1.1
+version: 1.2
 status: approved-reference
 language: en-US
 last_updated: 2026-08-10
@@ -10,7 +10,7 @@ scope:
   - runtime-neutral agent routing
   - planning, execution, and review boundaries
   - repository intelligence and evidence rules
-authority_note: Repository-specific approved authority and observed repository evidence take precedence where this contract explicitly delegates authority.
+authority_note: Approved repository authority governs intended behavior. Observed repository evidence governs claims about current implementation reality. Neither silently overrides the other.
 ---
 
 # Repository AI Delivery Contract
@@ -25,7 +25,7 @@ It does not define generic coding methodology or vendor-specific agent behavior.
 
 `.agents/software-workflow.md` is the normative software-delivery protocol.
 
-Planning and review MUST follow that protocol, including its authority model, quality gates, traceability requirements, task contract, evidence rules, acceptance model, and separate Release Gate.
+Planning, execution, and review MUST conform to that protocol, including its authority model, quality gates, traceability requirements, task contract, evidence rules, acceptance model, and separate Release Gate. Progressive loading does not require every role to read the entire protocol when this contract and the governing task provide the applicable execution boundaries.
 
 Do not bypass a required protocol gate merely because implementation is technically possible.
 
@@ -184,7 +184,15 @@ Execution and review MUST remain tied to the exact task revision that governed t
 
 For Git repositories, task identity SHOULD be representable as:
 
-`<task path> @ <immutable Git revision>`
+`<task path> @ <immutable Git revision containing the governing task content>`
+
+The immutable task revision MAY be resolved externally from version-control history or orchestration metadata; the task body does not need to embed the commit SHA that contains itself.
+
+A Draft task MAY temporarily use an unresolved publication placeholder, but a task MUST NOT be treated as Validated/Published or handed to the Executor until its exact immutable governing revision is resolvable.
+
+Task lifecycle state and governing task revision are distinct. A status-only update MUST NOT silently replace the immutable task revision that governed an execution attempt. A remediation change that materially alters the executable contract MUST be republished as a new immutable task revision before renewed execution.
+
+If establishing the immutable published task revision requires an otherwise unauthorized side effect, planning MUST stop for the applicable authorization rather than hand an unresolved task to the Executor.
 
 A validated published task MAY proceed automatically to execution unless repository-specific policy requires another approval gate.
 
@@ -301,20 +309,22 @@ After installation into a target repository, runtime-specific adapter material M
 
 ## Operating principle
 
-Use the smallest sufficient context and follow this sequence:
+Use the smallest sufficient context and follow this control loop:
 
 ```text
-identify authority
-→ establish current delivery state
+establish current delivery state
+→ identify intended authority and observed evidence
 → load only relevant context
-→ plan through the applicable protocol gates
-→ publish a validated bounded task
-→ execute against the exact baseline and task revision
+→ resolve pending implementation, review, remediation, or approval state first
+→ establish or confirm the accepted baseline
+→ plan from the earliest unmet or materially unreliable gate
+→ publish a validated bounded task only when T5 is satisfied
+→ execute against the exact baseline and governing task revision
 → reuse established repository patterns
 → verify with observed evidence
-→ review against authority and implementation reality
-→ remediate or establish the new accepted baseline
-→ continue planning independently of release
+→ return to Planner/Reviewer orchestration
+→ remediate, accept a new immutable baseline, repair authority, or publish the next valid task
+→ continue development independently of release
 ```
 
 When uncertain, verify the repository rather than inventing authority.
