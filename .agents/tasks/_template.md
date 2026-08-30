@@ -1,10 +1,10 @@
 ---
 title: Executable Task Template
 document_id: AGENT-TASK-001
-version: 1.2
+version: 1.3
 status: approved-template
 language: en-US
-last_updated: 2026-08-30
+last_updated: 2026-08-31
 scope:
   - validated executable delivery tasks
   - bounded implementation contracts
@@ -14,7 +14,7 @@ authority_note: A published validated task authorizes only the bounded implement
 
 # Executable Task
 
-This file defines a bounded software-delivery contract for implementation.
+This file defines a bounded cross-domain work contract for implementation or other governed execution.
 
 A validated task MUST provide enough authority, scope, acceptance, verification, and stop-condition information for an Executor to proceed without inventing material product, requirement, architecture, scope, or approval decisions.
 

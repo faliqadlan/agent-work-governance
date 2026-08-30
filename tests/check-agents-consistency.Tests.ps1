@@ -31,6 +31,16 @@ $fixture = New-Fixture
 try {
     $manifestPath = Join-Path $fixture '.agents/manifest.json'
     $manifest = Get-Content -Raw -LiteralPath $manifestPath | ConvertFrom-Json
+    $manifest.architecture.core.path = '.agents/core-governance.md'
+    Remove-Item -LiteralPath (Join-Path $fixture '.agents/core-governance.md')
+    $manifest | ConvertTo-Json -Depth 10 | Set-Content -LiteralPath $manifestPath
+    Assert-CheckerFails $fixture "Manifest architecture core path '.agents/core-governance.md' does not exist."
+} finally { if (Test-Path -LiteralPath $fixture) { Remove-Item -Recurse -Force -LiteralPath $fixture } }
+
+$fixture = New-Fixture
+try {
+    $manifestPath = Join-Path $fixture '.agents/manifest.json'
+    $manifest = Get-Content -Raw -LiteralPath $manifestPath | ConvertFrom-Json
     $manifest.canonical_artifacts = @($manifest.canonical_artifacts | Sort-Object -Property path -Descending)
     $manifest | ConvertTo-Json -Depth 10 | Set-Content -LiteralPath $manifestPath
     $result = Invoke-FixtureChecker $fixture

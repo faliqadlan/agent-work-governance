@@ -1,10 +1,10 @@
 ---
 title: Codex Runtime Adapter
 document_id: AGENT-RUNTIME-CODEX-001
-version: 1.2
+version: 1.3
 status: approved-template
 language: en-US
-last_updated: 2026-08-30
+last_updated: 2026-08-31
 runtime: Codex
 materialization_target: ./AGENTS.md
 scope:
@@ -17,7 +17,7 @@ authority_note: This file is a runtime bootstrap and execution-methodology adapt
 
 # Codex Runtime Adapter
 
-This file is the root Codex instruction entrypoint for repositories using the canonical `.agents/` software-delivery framework.
+This file is the root Codex instruction entrypoint for repositories using the canonical `.agents/` Agent Work Governance framework.
 
 Its purpose is to connect Codex instruction discovery to the repository-local delivery contract.
 
@@ -47,7 +47,7 @@ When applicable, follow its role-aware progressive-loading rules for:
 - side-effect boundaries;
 - runtime-neutral engineering methodology.
 
-`.agents/software-workflow.md` remains the normative software-delivery protocol.
+`.agents/core-governance.md` is the domain-neutral governance core; load the relevant profile, including `.agents/software-workflow.md` for Software work.
 
 This root adapter MUST NOT override either canonical file.
 
@@ -117,7 +117,7 @@ Use relevant installed capabilities when they materially improve the current res
 When a skill or plugin defines its own invocation or methodology rules, follow those rules **within** the repository delivery boundaries defined by:
 
 1. applicable human and approved repository authority;
-2. `.agents/software-workflow.md`;
+2. `.agents/core-governance.md` and the relevant selected profile;
 3. `.agents/AGENTS.md`;
 4. the exact governing validated task when executing;
 5. applicable approval, permission, security, privacy, and side-effect boundaries.

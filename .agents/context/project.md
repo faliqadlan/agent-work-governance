@@ -1,10 +1,10 @@
 ---
 title: Repository Context Template
 document_id: AGENT-CONTEXT-001
-version: 1.1
+version: 1.2
 status: approved-template
 language: en-US
-last_updated: 2026-08-10
+last_updated: 2026-08-31
 scope:
   - repository-level AI orientation
   - repository authority mapping
@@ -15,7 +15,7 @@ authority_note: This file is supporting, refreshable repository context. Approve
 
 # Repository Context
 
-This file is the repository-level context entrypoint for AI-assisted software delivery when adopted into a target repository.
+This file is the repository-level context entrypoint for AI-assisted governed work when adopted into a target repository.
 
 In this repository, it remains an approved reusable template. Its angle-bracket values are intentional placeholders and must be replaced with verified target-repository facts during adoption; they are not claims about this template repository.
 
@@ -71,7 +71,7 @@ Existing repositories MUST reuse valid artifacts and implementation evidence rat
 
 ## Intended authority map
 
-Map the intended-authority responsibilities defined by `.agents/software-workflow.md` to the actual approved sources used by this repository.
+Map the intended-authority responsibilities defined by `.agents/core-governance.md` and the selected profile to the actual approved sources used by this repository.
 
 Physical file locations and artifact structure are repository-defined.
 
@@ -193,7 +193,7 @@ Material contradictions MUST be verified against repository authority before use
 
 ## Delivery state
 
-Record the currently verified software-delivery state.
+Record the currently verified governed-work state.
 
 This section is an orientation summary, not a replacement for authoritative delivery-planning artifacts.
 
@@ -209,7 +209,7 @@ This section is an orientation summary, not a replacement for authoritative deli
 
 Record only gates that have been verified from repository evidence.
 
-Use the canonical gate states from `.agents/software-workflow.md`:
+Use the canonical gate states from the selected profile (Software uses `.agents/software-workflow.md`; Scientific uses `.agents/profiles/scientific-governance.md`):
 
 `pending`, `in_review`, `blocked`, `passed`, `reopened`, or `not_applicable` with recorded rationale.
 

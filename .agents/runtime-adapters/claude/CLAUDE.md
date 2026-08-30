@@ -1,4 +1,4 @@
-<!-- runtime-adapter: claude | version: 1.2 | status: approved-template -->
+<!-- runtime-adapter: claude | version: 1.3 | status: approved-template -->
 <!-- source-location import: @../../AGENTS.md -->
 <!-- when materialized as ./CLAUDE.md, replace that import with @.agents/AGENTS.md -->
 
@@ -6,7 +6,7 @@
 
 # Claude Code Runtime Adapter
 
-This file connects Claude Code to the repository-local, runtime-neutral software-delivery contract under `.agents/`.
+This file connects Claude Code to the repository-local, runtime-neutral Agent Work Governance contract under `.agents/`.
 
 The imported `.agents/AGENTS.md` contract is canonical for repository AI delivery.
 
@@ -16,7 +16,7 @@ This adapter adds only Claude Code-specific runtime behavior. It MUST NOT redefi
 
 Use the imported `.agents/AGENTS.md` contract for role routing and progressive loading.
 
-`.agents/software-workflow.md` remains the normative software-delivery protocol.
+`.agents/core-governance.md` is the domain-neutral core; load the relevant profile, including `.agents/software-workflow.md` for Software work.
 
 When acting as Planner or Reviewer:
 
@@ -112,7 +112,7 @@ Use relevant installed capabilities when they materially improve the current res
 Runtime methodology remains subordinate to:
 
 1. applicable direct human and approved repository authority;
-2. `.agents/software-workflow.md`;
+2. `.agents/core-governance.md` and the relevant selected profile;
 3. `.agents/AGENTS.md`;
 4. the exact governing validated task when executing;
 5. applicable approval, permission, security, privacy, and side-effect boundaries.

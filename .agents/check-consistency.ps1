@@ -35,6 +35,41 @@ function Get-DeclaredVersion([string]$Text, [string]$Path) {
 $manifestRelative = '.agents/manifest.json'
 $manifest = Get-Content -Raw -LiteralPath (Resolve-RepoPath $manifestRelative) | ConvertFrom-Json
 
+if (-not $manifest.architecture) {
+    Add-Error "Manifest is missing the Agent Work Governance architecture section."
+} else {
+    $corePath = [string]$manifest.architecture.core.path
+    if (-not (Test-Path -LiteralPath (Resolve-RepoPath $corePath) -PathType Leaf)) {
+        Add-Error "Manifest architecture core path '$corePath' does not exist."
+    }
+
+    $profiles = @($manifest.architecture.profiles)
+    if ($profiles.Count -lt 2) {
+        Add-Error 'Manifest architecture must declare at least Software and Scientific profiles.'
+    }
+    $profileIds = @($profiles | ForEach-Object { [string]$_.id })
+    if (@($profileIds | Sort-Object -Unique).Count -ne $profileIds.Count) {
+        Add-Error 'Manifest architecture contains duplicate profile identities.'
+    }
+    foreach ($profile in $profiles) {
+        $profileId = [string]$profile.id
+        $profilePath = [string]$profile.path
+        if (-not $profileId -or -not $profilePath) {
+            Add-Error 'Manifest architecture contains a profile without an id or path.'
+            continue
+        }
+        if (-not (Test-Path -LiteralPath (Resolve-RepoPath $profilePath) -PathType Leaf)) {
+            Add-Error "Manifest architecture profile '$profileId' path '$profilePath' does not exist."
+        }
+    }
+    if ($profileIds -notcontains 'software' -or $profileIds -notcontains 'scientific') {
+        Add-Error "Manifest architecture must include unique 'software' and 'scientific' profiles."
+    }
+    if ([string]$manifest.architecture.profile_selection.control_plane -ne '.agents/') {
+        Add-Error "Manifest architecture profile selection must use the single '.agents/' control plane."
+    }
+}
+
 foreach ($artifact in $manifest.canonical_artifacts) {
     $path = [string]$artifact.path
     $absolute = Resolve-RepoPath $path
@@ -49,11 +84,13 @@ foreach ($artifact in $manifest.canonical_artifacts) {
 }
 
 $expectedCanonicalArtifacts = @{
+    '.agents/core-governance.md' = 'core-governance.md'
     '.agents/software-workflow.md' = 'software-workflow.md'
     '.agents/AGENTS.md' = 'AGENTS.md'
     '.agents/context/project.md' = 'context/project.md'
     '.agents/prompts/plan-create-task.md' = 'prompts/plan-create-task.md'
     '.agents/tasks/_template.md' = 'tasks/_template.md'
+    '.agents/profiles/scientific-governance.md' = 'profiles/scientific-governance.md'
 }
 $canonicalByPath = @{}
 foreach ($artifact in @($manifest.canonical_artifacts)) {

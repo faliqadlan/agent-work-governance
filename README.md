@@ -1,6 +1,6 @@
-# Code Agent Template
+# Agent Work Governance
 
-A runtime-neutral, repository-local software-delivery framework for AI coding agents and mixed human/AI development.
+A runtime-neutral, repository-local framework for governing human/AI work across Software and Scientific profiles.
 
 This repository defines **delivery governance**, not a generic coding methodology.
 
@@ -16,13 +16,13 @@ It answers questions such as:
 - Which exact repository revision becomes the next accepted baseline?
 - Has implementation merely been accepted, or has release also been approved?
 
-Generic engineering technique—brainstorming, TDD, debugging, worktrees, subagent orchestration, security scanning, code review, and similar methodology—belongs to the execution runtime and its installed tooling.
+Domain methodology and specialist capability—such as Superpowers, Science Superpowers, Scientific Agent Skills, TDD, debugging, and subagent orchestration—belongs to external execution tooling and remains separate from governance.
 
 > **Important**
 >
 > This README is human-facing documentation. It is not repository delivery authority.
 >
-> The canonical repository AI contract is [`.agents/AGENTS.md`](.agents/AGENTS.md), and the normative delivery lifecycle is [`.agents/software-workflow.md`](.agents/software-workflow.md).
+> The canonical repository contract is [`.agents/AGENTS.md`](.agents/AGENTS.md), the domain-neutral core is [`.agents/core-governance.md`](.agents/core-governance.md), and the selected profiles are [`.agents/software-workflow.md`](.agents/software-workflow.md) and [`.agents/profiles/scientific-governance.md`](.agents/profiles/scientific-governance.md).
 
 ---
 
@@ -42,7 +42,17 @@ runtime methodology
   (skills, plugins, Superpowers, MCP, subagents, native tooling)
 ```
 
-This separation keeps repository delivery policy stable even when the coding agent, model, IDE, plugin system, or technical methodology changes.
+This separation keeps governance stable while the runtime, model, domain methodology, or specialist capability changes.
+
+```text
+Agent Work Governance
+├── Core: cross-domain governance invariants
+├── Software profile: accepted software lifecycle semantics
+├── Scientific profile: research authority, provenance, and claim review
+├── External methodology: Superpowers / Science Superpowers
+├── External capability: Scientific Agent Skills
+└── Runtime adapters: entry and deterministic enforcement bridges
+```
 
 ---
 
@@ -51,7 +61,11 @@ This separation keeps repository delivery policy stable even when the coding age
 ```text
 .agents/
 ├── AGENTS.md
+├── core-governance.md
 ├── software-workflow.md
+├── profiles/
+│   ├── README.md
+│   └── scientific-governance.md
 ├── context/
 │   └── project.md
 ├── prompts/
@@ -75,7 +89,10 @@ This separation keeps repository delivery policy stable even when the coding age
 
 | Path | Purpose |
 |---|---|
+| [`.agents/core-governance.md`](.agents/core-governance.md) | Domain-neutral governance core shared by profiles. |
 | [`.agents/software-workflow.md`](.agents/software-workflow.md) | Normative, runtime-neutral software-delivery lifecycle and quality gates. |
+| [`.agents/profiles/scientific-governance.md`](.agents/profiles/scientific-governance.md) | Scientific governance profile for research and analysis work. |
+| [`.agents/profiles/README.md`](.agents/profiles/README.md) | Profile selection, precedence, progressive loading, and adoption guidance. |
 | [`.agents/AGENTS.md`](.agents/AGENTS.md) | Compact repository AI delivery contract and role router. |
 | [`.agents/context/project.md`](.agents/context/project.md) | Refreshable repository orientation, authority map, observed-evidence map, delivery state, and scoped-context router. |
 | [`.agents/prompts/plan-create-task.md`](.agents/prompts/plan-create-task.md) | Reusable Planner/Reviewer orchestration procedure. |
@@ -86,14 +103,16 @@ This separation keeps repository delivery policy stable even when the coding age
 
 | Artifact | Version |
 |---|---:|
+| `core-governance.md` | 1.0 |
 | `software-workflow.md` | 2.3 |
-| `AGENTS.md` | 1.3 |
-| `context/project.md` | 1.1 |
-| `prompts/plan-create-task.md` | 2.4 |
-| `tasks/_template.md` | 1.2 |
-| Codex adapter | 1.2 |
-| Claude adapter | 1.2 |
-| Antigravity adapter | 1.2 |
+| `AGENTS.md` | 1.4 |
+| `profiles/scientific-governance.md` | 1.0 |
+| `context/project.md` | 1.2 |
+| `prompts/plan-create-task.md` | 2.5 |
+| `tasks/_template.md` | 1.3 |
+| Codex adapter | 1.3 |
+| Claude adapter | 1.3 |
+| Antigravity adapter | 1.3 |
 
 The root README does not define canonical protocol versioning. Each normative or runtime-specific artifact carries its own version where needed.
 

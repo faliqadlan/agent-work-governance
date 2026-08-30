@@ -1,31 +1,33 @@
 ---
-title: Repository AI Delivery Contract
+title: Agent Work Governance Repository Contract
 document_id: AGENTS-CONTRACT-001
-version: 1.3
+version: 1.4
 status: approved-reference
 language: en-US
-last_updated: 2026-08-30
+last_updated: 2026-08-31
 scope:
-  - repository-local AI delivery governance
-  - runtime-neutral agent routing
+  - cross-domain repository-local AI work governance
+  - profile-neutral runtime agent routing
   - planning, execution, and review boundaries
   - repository intelligence and evidence rules
 authority_note: Approved repository authority governs intended behavior. Observed repository evidence governs claims about current implementation reality. Neither silently overrides the other.
 ---
 
-# Repository AI Delivery Contract
+# Agent Work Governance Repository Contract
 
-This `.agents/` package defines the repository-local, runtime-neutral software-delivery contract for AI coding agents and mixed human/AI delivery.
+This `.agents/` package defines the repository-local, runtime-neutral Agent Work Governance contract for mixed human/AI work.
 
-It governs repository authority, delivery routing, context loading, task execution boundaries, evidence, and acceptance.
+It governs authority, evidence, work-contract identity, delivery routing, context loading, task execution boundaries, review, and acceptance across supported profiles.
 
-It does not define generic coding methodology or vendor-specific agent behavior.
+It does not define generic domain methodology, specialist capability behavior, or vendor-specific agent behavior.
 
-## Canonical delivery protocol
+## Canonical governance and profile routing
 
-`.agents/software-workflow.md` is the normative software-delivery protocol.
+`.agents/core-governance.md` is the domain-neutral governance core. `.agents/software-workflow.md` is the preserved Software profile. `.agents/profiles/scientific-governance.md` is the Scientific profile.
 
-Planning, execution, and review MUST conform to that protocol, including its authority model, quality gates, traceability requirements, task contract, evidence rules, acceptance model, and separate Release Gate. Progressive loading does not require every role to read the entire protocol when this contract and the governing task provide the applicable execution boundaries.
+Planning, execution, and review MUST conform to the core and the selected profile. Software work retains the protocol's authority model, quality gates, traceability requirements, task contract, evidence rules, acceptance model, and separate Release Gate. Scientific work loads the Scientific profile for research-specific semantics. Progressive loading does not require every role to read an irrelevant profile.
+
+Profile selection is governed by applicable human and approved repository authority, then the published governing task and its explicit work classification. A profile MUST NOT override the core, repository authority, task revision, or side-effect boundaries.
 
 Do not bypass a required protocol gate merely because implementation is technically possible.
 
@@ -79,6 +81,7 @@ The Planner establishes or re-establishes delivery readiness and publishes valid
 Before material planning, load:
 
 - this contract;
+- `.agents/core-governance.md`;
 - `.agents/software-workflow.md`;
 - `.agents/context/project.md`;
 - only the scoped context relevant to the current work;
@@ -112,6 +115,7 @@ The Reviewer determines whether implementation satisfies its governing delivery 
 Before material review, load:
 
 - this contract;
+- `.agents/core-governance.md`;
 - `.agents/software-workflow.md`;
 - `.agents/context/project.md`;
 - only the scoped context relevant to the review;
@@ -283,11 +287,11 @@ Those actions require explicit authorization from the governing task, repository
 
 Never invent, expose, copy, or persist secret values.
 
-## Engineering methodology
+## Methodology and capability boundaries
 
-Runtime-native or externally installed software-engineering methodologies, skills, plugins, and tools MAY be used when appropriate.
+Runtime-native or externally installed domain methodologies, skills, plugins, and tools MAY be used when appropriate.
 
-Examples include methodologies for brainstorming, implementation planning, debugging, testing discipline, worktree management, code review, subagent coordination, and verification.
+Examples include software methodologies such as Superpowers, scientific methodologies such as Science Superpowers, and specialist capability libraries such as Scientific Agent Skills.
 
 Such methodologies are execution aids.
 
@@ -298,7 +302,7 @@ They MUST remain subordinate to:
 3. the governing validated task;
 4. applicable approval and safety boundaries.
 
-No external methodology becomes repository authority merely because it is installed or popular.
+No external methodology or capability becomes repository authority merely because it is installed, retrieved, imperative, or popular. External sources remain separately maintained and are not required to be copied into `.agents/`.
 
 ## Runtime neutrality
 
