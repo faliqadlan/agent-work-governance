@@ -41,6 +41,22 @@ $fixture = New-Fixture
 try {
     $antigravityReadmePath = Join-Path $fixture '.agents/runtime-adapters/antigravity/README.md'
     $antigravityReadme = Get-Content -Raw -LiteralPath $antigravityReadmePath
+    $validTreeEntry = '    │           └── antigravity-code-agent-workflow.md'
+    $invalidTreeEntry = '    │           └── code-agent-workflow.md'
+    $antigravityReadme = $antigravityReadme.Replace($validTreeEntry, $invalidTreeEntry)
+    Set-Content -LiteralPath $antigravityReadmePath -Value $antigravityReadme
+    Assert-CheckerFails $fixture "Antigravity retained source depiction uses materialized filename 'code-agent-workflow.md'"
+
+    $antigravityReadme = $antigravityReadme.Replace($invalidTreeEntry, $validTreeEntry)
+    Set-Content -LiteralPath $antigravityReadmePath -Value $antigravityReadme
+    $result = Invoke-FixtureChecker $fixture
+    if ($result.ExitCode -ne 0) { throw "Restored valid Antigravity tree should pass. Output=$($result.Output)" }
+} finally { if (Test-Path -LiteralPath $fixture) { Remove-Item -Recurse -Force -LiteralPath $fixture } }
+
+$fixture = New-Fixture
+try {
+    $antigravityReadmePath = Join-Path $fixture '.agents/runtime-adapters/antigravity/README.md'
+    $antigravityReadme = Get-Content -Raw -LiteralPath $antigravityReadmePath
     $antigravityReadme = $antigravityReadme.Replace('runtime-adapters/antigravity/rules/antigravity-code-agent-workflow.md', 'runtime-adapters/antigravity/rules/code-agent-workflow.md')
     Set-Content -LiteralPath $antigravityReadmePath -Value $antigravityReadme
     Assert-CheckerFails $fixture "Antigravity retained source depiction uses materialized filename 'code-agent-workflow.md'"

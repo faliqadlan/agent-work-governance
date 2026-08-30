@@ -135,11 +135,37 @@ if (-not $sourceText.Contains($target)) {
     Add-Error "The retained Antigravity source does not identify materialization target '$target'."
 }
 
-$staleRetainedSourcePatterns = @(
-    'runtime-adapters/antigravity/rules[/\\]code-agent-workflow\.md',
-    '(?s)runtime-adapters/antigravity/.{0,100}?rules[/\\]\r?\n[ \t│├└─]*code-agent-workflow\.md'
-)
-if ($staleRetainedSourcePatterns | Where-Object { [regex]::IsMatch($antigravityReadme, $_) }) {
+function Test-AntigravityTreeUsesMaterializedName([string]$Text) {
+    $lines = $Text -split "`r?`n"
+    $inTypicalTree = $false
+    $inFence = $false
+    $treeState = 0
+
+    foreach ($line in $lines) {
+        if ($line -match '^Typical resulting repository:\s*$') {
+            $inTypicalTree = $true
+            continue
+        }
+        if (-not $inTypicalTree) { continue }
+        if ($line -match '^```') {
+            $inFence = -not $inFence
+            continue
+        }
+        if (-not $inFence) { continue }
+
+        if ($treeState -eq 0 -and $line -match 'runtime-adapters/') { $treeState = 1; continue }
+        if ($treeState -eq 1 -and $line -match 'antigravity/') { $treeState = 2; continue }
+        if ($treeState -eq 2 -and $line -match 'rules/') { $treeState = 3; continue }
+        if ($treeState -eq 3) {
+            return $line -match '(?<!antigravity-)code-agent-workflow\.md\s*$'
+        }
+    }
+
+    return $false
+}
+
+$staleRetainedSourcePatterns = @('runtime-adapters/antigravity/rules[/\\]code-agent-workflow\.md')
+if (($staleRetainedSourcePatterns | Where-Object { [regex]::IsMatch($antigravityReadme, $_) }) -or (Test-AntigravityTreeUsesMaterializedName $antigravityReadme)) {
     Add-Error "Antigravity retained source depiction uses materialized filename 'code-agent-workflow.md'; use 'antigravity-code-agent-workflow.md' beneath runtime-adapters/antigravity/rules/."
 }
 
