@@ -135,6 +135,14 @@ if (-not $sourceText.Contains($target)) {
     Add-Error "The retained Antigravity source does not identify materialization target '$target'."
 }
 
+$staleRetainedSourcePatterns = @(
+    'runtime-adapters/antigravity/rules[/\\]code-agent-workflow\.md',
+    '(?s)runtime-adapters/antigravity/.{0,100}?rules[/\\]\r?\n[ \t│├└─]*code-agent-workflow\.md'
+)
+if ($staleRetainedSourcePatterns | Where-Object { [regex]::IsMatch($antigravityReadme, $_) }) {
+    Add-Error "Antigravity retained source depiction uses materialized filename 'code-agent-workflow.md'; use 'antigravity-code-agent-workflow.md' beneath runtime-adapters/antigravity/rules/."
+}
+
 # Validate repository-local Markdown links in the root README. Approved template
 # placeholders are content, not links, and therefore do not affect this check.
 foreach ($match in [regex]::Matches($readme, '\]\(([^)#]+)(?:#[^)]*)?\)')) {

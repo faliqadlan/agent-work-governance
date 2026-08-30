@@ -4,7 +4,7 @@ document_id: AGENT-PROMPT-PLAN-001
 version: 2.4
 status: approved-template
 language: en-US
-last_updated: 2026-08-10
+last_updated: 2026-08-30
 role:
   - Planner
   - Reviewer

@@ -4,7 +4,7 @@ document_id: AGENT-RUNTIME-ANTIGRAVITY-README-001
 version: 1.2
 status: approved-template
 language: en-US
-last_updated: 2026-08-10
+last_updated: 2026-08-30
 runtime: Antigravity
 scope:
   - Antigravity adapter installation
@@ -105,7 +105,7 @@ target-repository/
     │   └── antigravity/
     │       ├── README.md
     │       └── rules/
-    │           └── code-agent-workflow.md
+    │           └── antigravity-code-agent-workflow.md
     └── rules/
         └── code-agent-workflow.md
 ```

@@ -4,7 +4,7 @@ document_id: AGENTS-CONTRACT-001
 version: 1.3
 status: approved-reference
 language: en-US
-last_updated: 2026-08-10
+last_updated: 2026-08-30
 scope:
   - repository-local AI delivery governance
   - runtime-neutral agent routing

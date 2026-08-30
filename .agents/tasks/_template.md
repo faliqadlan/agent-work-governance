@@ -4,7 +4,7 @@ document_id: AGENT-TASK-001
 version: 1.2
 status: approved-template
 language: en-US
-last_updated: 2026-08-10
+last_updated: 2026-08-30
 scope:
   - validated executable delivery tasks
   - bounded implementation contracts

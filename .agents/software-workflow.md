@@ -4,7 +4,7 @@ document_id: SD-PROTOCOL-001
 version: 2.3
 status: approved-reference
 language: en-US
-last_updated: 2026-08-10
+last_updated: 2026-08-30
 applies_to:
   - software repositories
   - services and APIs

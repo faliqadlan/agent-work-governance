@@ -39,6 +39,15 @@ try {
 
 $fixture = New-Fixture
 try {
+    $antigravityReadmePath = Join-Path $fixture '.agents/runtime-adapters/antigravity/README.md'
+    $antigravityReadme = Get-Content -Raw -LiteralPath $antigravityReadmePath
+    $antigravityReadme = $antigravityReadme.Replace('runtime-adapters/antigravity/rules/antigravity-code-agent-workflow.md', 'runtime-adapters/antigravity/rules/code-agent-workflow.md')
+    Set-Content -LiteralPath $antigravityReadmePath -Value $antigravityReadme
+    Assert-CheckerFails $fixture "Antigravity retained source depiction uses materialized filename 'code-agent-workflow.md'"
+} finally { if (Test-Path -LiteralPath $fixture) { Remove-Item -Recurse -Force -LiteralPath $fixture } }
+
+$fixture = New-Fixture
+try {
     $manifestPath = Join-Path $fixture '.agents/manifest.json'
     $manifest = Get-Content -Raw -LiteralPath $manifestPath | ConvertFrom-Json
     $manifest.runtime_adapters.antigravity.source_files[0] = '.agents/runtime-adapters/antigravity/rules/missing.md'
