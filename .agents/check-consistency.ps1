@@ -48,6 +48,30 @@ foreach ($artifact in $manifest.canonical_artifacts) {
     }
 }
 
+$expectedCanonicalArtifacts = @{
+    '.agents/software-workflow.md' = 'software-workflow.md'
+    '.agents/AGENTS.md' = 'AGENTS.md'
+    '.agents/context/project.md' = 'context/project.md'
+    '.agents/prompts/plan-create-task.md' = 'prompts/plan-create-task.md'
+    '.agents/tasks/_template.md' = 'tasks/_template.md'
+}
+$canonicalByPath = @{}
+foreach ($artifact in @($manifest.canonical_artifacts)) {
+    $path = [string]$artifact.path
+    if ($expectedCanonicalArtifacts.ContainsKey($path)) {
+        if ($canonicalByPath.ContainsKey($path)) {
+            Add-Error "Manifest contains duplicate canonical artifact identity '$path'."
+        } else {
+            $canonicalByPath[$path] = $artifact
+        }
+    }
+}
+foreach ($expectedPath in $expectedCanonicalArtifacts.Keys) {
+    if (-not $canonicalByPath.ContainsKey($expectedPath)) {
+        Add-Error "Manifest is missing expected canonical artifact '$expectedPath'."
+    }
+}
+
 foreach ($adapterProperty in $manifest.runtime_adapters.psobject.Properties) {
     $adapter = $adapterProperty.Value
     foreach ($path in $adapter.source_files) {
@@ -78,12 +102,11 @@ $antigravitySource = '.agents/runtime-adapters/antigravity/rules/antigravity-cod
 $staleSource = '.agents/runtime-adapters/antigravity/rules/code-agent-workflow.md'
 $target = '.agents/rules/code-agent-workflow.md'
 
-$readmeVersions = @{
-    'software-workflow.md' = [string]$manifest.canonical_artifacts[0].version
-    'AGENTS.md' = [string]$manifest.canonical_artifacts[1].version
-    'context/project.md' = [string]$manifest.canonical_artifacts[2].version
-    'prompts/plan-create-task.md' = [string]$manifest.canonical_artifacts[3].version
-    'tasks/_template.md' = [string]$manifest.canonical_artifacts[4].version
+$readmeVersions = @{}
+foreach ($expectedPath in $expectedCanonicalArtifacts.Keys) {
+    if ($canonicalByPath.ContainsKey($expectedPath)) {
+        $readmeVersions[$expectedCanonicalArtifacts[$expectedPath]] = [string]$canonicalByPath[$expectedPath].version
+    }
 }
 foreach ($entry in $readmeVersions.GetEnumerator()) {
     $pattern = '\|\s*`' + [regex]::Escape($entry.Key) + '`\s*\|\s*([^|]+)\s*\|'

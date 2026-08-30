@@ -86,14 +86,14 @@ This separation keeps repository delivery policy stable even when the coding age
 
 | Artifact | Version |
 |---|---:|
-| `software-workflow.md` | 2.2 |
-| `AGENTS.md` | 1.2 |
+| `software-workflow.md` | 2.3 |
+| `AGENTS.md` | 1.3 |
 | `context/project.md` | 1.1 |
-| `prompts/plan-create-task.md` | 2.3 |
-| `tasks/_template.md` | 1.1 |
-| Codex adapter | 1.1 |
-| Claude adapter | 1.1 |
-| Antigravity adapter | 1.1 |
+| `prompts/plan-create-task.md` | 2.4 |
+| `tasks/_template.md` | 1.2 |
+| Codex adapter | 1.2 |
+| Claude adapter | 1.2 |
+| Antigravity adapter | 1.2 |
 
 The root README does not define canonical protocol versioning. Each normative or runtime-specific artifact carries its own version where needed.
 

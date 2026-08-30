@@ -1,7 +1,7 @@
 ---
 title: Codex Runtime Adapter Setup
 document_id: AGENT-RUNTIME-CODEX-README-001
-version: 1.1
+version: 1.2
 status: approved-template
 language: en-US
 last_updated: 2026-08-10
@@ -15,6 +15,8 @@ authority_note: This README is operator guidance for installing the Codex runtim
 ---
 
 # Codex Runtime Adapter
+
+Where the current Codex runtime exposes sandbox, approval, network, filesystem, or similar deterministic controls, configure or recommend them for material authorization and safety boundaries proportionately. Verify current runtime configuration before relying on a specific control; runtime enforcement supplements rather than replaces repository authority.
 
 This directory contains the Codex-specific bootstrap for the runtime-neutral `.agents/` software-delivery framework.
 

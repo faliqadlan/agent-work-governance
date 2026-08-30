@@ -1,7 +1,7 @@
 ---
 title: Antigravity Runtime Adapter Setup
 document_id: AGENT-RUNTIME-ANTIGRAVITY-README-001
-version: 1.1
+version: 1.2
 status: approved-template
 language: en-US
 last_updated: 2026-08-10
@@ -15,6 +15,8 @@ authority_note: This README is operator guidance for installing the Antigravity 
 ---
 
 # Antigravity Runtime Adapter
+
+For material authorization or safety boundaries, map the requirement to Antigravity's current project or workspace security preset, tool-permission mode, local permission, or MCP allow-list controls where proportionate. Verify the effective setting in the supported runtime; workspace rules remain guidance and do not replace deterministic enforcement or repository authority.
 
 This directory contains the Antigravity-specific bootstrap for the runtime-neutral `.agents/` software-delivery framework.
 

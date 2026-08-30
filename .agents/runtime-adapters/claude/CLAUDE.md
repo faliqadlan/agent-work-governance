@@ -1,4 +1,4 @@
-<!-- runtime-adapter: claude | version: 1.1 | status: approved-template -->
+<!-- runtime-adapter: claude | version: 1.2 | status: approved-template -->
 <!-- source-location import: @../../AGENTS.md -->
 <!-- when materialized as ./CLAUDE.md, replace that import with @.agents/AGENTS.md -->
 
