@@ -46,20 +46,41 @@ This task remains Draft. It MUST NOT be treated as Validated/Published or execut
 
 ## Authoritative inputs
 
-### Governing authority
+### Governing human intent
+
+The current Human Request supplies the delivery objective and non-main branch constraint. Its validated intent snapshot is:
+
+- Audit the repository's `.agents` framework comprehensively.
+- Improve defects, inconsistencies, ambiguity, maintainability, and verifiability justified by the audit.
+- Preserve valid existing architecture rather than rewriting it without evidence.
+- Perform implementation work on a non-main branch; do not perform the improvement work on `main`.
+
+This human intent is the source of the objective, not technical truth. Repository authority and observed evidence constrain how it may validly be implemented.
+
+### Governing repository authority / protocol
 
 - `.agents/AGENTS.md` — approved repository AI delivery contract and runtime-neutral boundaries.
 - `.agents/software-workflow.md` — approved normative delivery protocol, task, review, baseline, and release semantics.
-- `.agents/prompts/plan-create-task.md` — approved Planner/Reviewer procedure for task readiness, publication, review, and escalation.
-- `.agents/tasks/_template.md` — approved structure and constraints for executable delivery contracts.
-- `.agents/manifest.json`, `.agents/context/project.md`, runtime-adapter sources/READMEs, and `README.md` — observed repository evidence and descriptive package material to reconcile, not authority over the canonical contract.
+
+### Governing procedure / representation aids
+
+- `.agents/prompts/plan-create-task.md` — applicable Planner/Reviewer procedure for task readiness, publication, review, and escalation; it is not substantive repository authority.
+- `.agents/tasks/_template.md` — applicable representation aid for executable delivery contracts; it is not substantive repository authority.
+
+These procedure and template materials must be followed according to their repository-defined roles without being promoted into intended authority.
+
+### Observed evidence and descriptive package material
+
+- `.agents/manifest.json`, `.agents/context/project.md`, runtime-adapter sources and READMEs, and `README.md` — descriptive or supporting material to reconcile against governing authority and current implementation evidence.
+- The audited repository contents, file paths, version declarations, links, Git state, and any checks run during execution — observed implementation evidence.
 
 ### Requirement traceability
 
-- `AFI-01` → `.agents/AGENTS.md` runtime neutrality, authority/evidence separation, runtime-adapter thinness, reuse, and preservation rules.
-- `AFI-02` → `.agents/software-workflow.md` validated-task, exact-revision, verification, stop-condition, and acceptance-versus-release requirements.
-- `AFI-03` → `.agents/prompts/plan-create-task.md` planning/review procedure and task-readiness expectations.
-- `AFI-04` → confirmed baseline evidence recorded below and any additional directly verified evidence discovered during execution.
+- `AFI-00` → Governing Human Intent snapshot above: comprehensive `.agents` audit, evidence-justified improvement, architecture preservation, and non-main implementation constraint.
+- `AFI-01` → `.agents/AGENTS.md`: runtime neutrality, authority/evidence separation, runtime-adapter thinness, reuse, and preservation rules.
+- `AFI-02` → `.agents/software-workflow.md`: validated-task, exact-revision, verification, stop-condition, and acceptance-versus-release requirements.
+- `AFI-03` → `.agents/prompts/plan-create-task.md` and `.agents/tasks/_template.md`: procedural conformance and task representation expectations only; neither is substantive requirement or repository authority.
+- `AFI-04` → confirmed baseline evidence recorded below and any additional directly verified evidence discovered during execution; this is observed evidence, not intended authority.
 
 External runtime documentation is supporting evidence only. Where material runtime claims are changed or retained, consult current primary documentation, including the official OpenAI Codex repository-instruction documentation/source, official Google Antigravity workspace-rule documentation, and official Anthropic Claude Code memory/import documentation as relevant. Examples available at execution time include:
 
