@@ -15,7 +15,9 @@ authority_note: This file is supporting, refreshable repository context. Approve
 
 # Repository Context
 
-This file is the repository-level context entrypoint for AI-assisted software delivery.
+This file is the repository-level context entrypoint for AI-assisted software delivery when adopted into a target repository.
+
+In this repository, it remains an approved reusable template. Its angle-bracket values are intentional placeholders and must be replaced with verified target-repository facts during adoption; they are not claims about this template repository.
 
 It provides a verified orientation map of the repository, identifies where authoritative information lives, summarizes the current delivery state, and routes agents to additional scoped context when needed.
 

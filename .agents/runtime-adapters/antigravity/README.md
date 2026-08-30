@@ -1,10 +1,10 @@
 ---
 title: Antigravity Runtime Adapter Setup
 document_id: AGENT-RUNTIME-ANTIGRAVITY-README-001
-version: 1.1
+version: 1.2
 status: approved-template
 language: en-US
-last_updated: 2026-08-10
+last_updated: 2026-08-30
 runtime: Antigravity
 scope:
   - Antigravity adapter installation
@@ -15,6 +15,8 @@ authority_note: This README is operator guidance for installing the Antigravity 
 ---
 
 # Antigravity Runtime Adapter
+
+For material authorization or safety boundaries, map the requirement to Antigravity's current project or workspace security preset, tool-permission mode, local permission, or MCP allow-list controls where proportionate. Verify the effective setting in the supported runtime; workspace rules remain guidance and do not replace deterministic enforcement or repository authority.
 
 This directory contains the Antigravity-specific bootstrap for the runtime-neutral `.agents/` software-delivery framework.
 
@@ -39,10 +41,10 @@ The Antigravity adapter does not redefine that framework.
 runtime-adapters/antigravity/
 ├── README.md
 └── rules/
-    └── code-agent-workflow.md
+    └── antigravity-code-agent-workflow.md
 ```
 
-### `rules/code-agent-workflow.md`
+### `rules/antigravity-code-agent-workflow.md`
 
 The adapter rule is intended to be materialized as:
 
@@ -103,7 +105,7 @@ target-repository/
     │   └── antigravity/
     │       ├── README.md
     │       └── rules/
-    │           └── code-agent-workflow.md
+    │           └── antigravity-code-agent-workflow.md
     └── rules/
         └── code-agent-workflow.md
 ```
@@ -291,7 +293,7 @@ Hooks and Project-level permission conflicts are assessed separately because the
 Copy:
 
 ```text
-.agents/runtime-adapters/antigravity/rules/code-agent-workflow.md
+.agents/runtime-adapters/antigravity/rules/antigravity-code-agent-workflow.md
 ```
 
 to:
@@ -307,7 +309,7 @@ Then configure the materialized rule as **Always On**.
 Compare it with the adapter source under:
 
 ```text
-.agents/runtime-adapters/antigravity/rules/code-agent-workflow.md
+.agents/runtime-adapters/antigravity/rules/antigravity-code-agent-workflow.md
 ```
 
 If the materialized rule is current and unmodified, no content merge is required.

@@ -68,7 +68,7 @@ This separation keeps repository delivery policy stable even when the coding age
     └── antigravity/
         ├── README.md
         └── rules/
-            └── code-agent-workflow.md
+            └── antigravity-code-agent-workflow.md
 ```
 
 ### Canonical artifacts
@@ -86,16 +86,24 @@ This separation keeps repository delivery policy stable even when the coding age
 
 | Artifact | Version |
 |---|---:|
-| `software-workflow.md` | 2.2 |
-| `AGENTS.md` | 1.2 |
+| `software-workflow.md` | 2.3 |
+| `AGENTS.md` | 1.3 |
 | `context/project.md` | 1.1 |
-| `prompts/plan-create-task.md` | 2.2 |
-| `tasks/_template.md` | 1.1 |
-| Codex adapter | 1.1 |
-| Claude adapter | 1.1 |
-| Antigravity adapter | 1.1 |
+| `prompts/plan-create-task.md` | 2.4 |
+| `tasks/_template.md` | 1.2 |
+| Codex adapter | 1.2 |
+| Claude adapter | 1.2 |
+| Antigravity adapter | 1.2 |
 
 The root README does not define canonical protocol versioning. Each normative or runtime-specific artifact carries its own version where needed.
+
+To verify manifest paths, mirrored versions, Antigravity source/target identity, and repository-local README links, run:
+
+```powershell
+.\.agents\check-consistency.ps1
+```
+
+The check treats `.agents/context/project.md` as an approved reusable template, so its intentional placeholders do not fail validation.
 
 ---
 
@@ -665,15 +673,17 @@ Adapter:
 
 Bootstrap source:
 
-[`.agents/runtime-adapters/antigravity/rules/code-agent-workflow.md`](.agents/runtime-adapters/antigravity/rules/code-agent-workflow.md)
+[`.agents/runtime-adapters/antigravity/rules/antigravity-code-agent-workflow.md`](.agents/runtime-adapters/antigravity/rules/antigravity-code-agent-workflow.md)
 
 Typical materialization:
 
 ```text
-.agents/runtime-adapters/antigravity/rules/code-agent-workflow.md
+.agents/runtime-adapters/antigravity/rules/antigravity-code-agent-workflow.md
 →
 .agents/rules/code-agent-workflow.md
 ```
+
+The retained source filename and the materialized target filename are intentionally different identities.
 
 Configure the materialized Workspace Rule as:
 

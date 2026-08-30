@@ -1,10 +1,10 @@
 ---
 title: Claude Code Runtime Adapter Setup
 document_id: AGENT-RUNTIME-CLAUDE-README-001
-version: 1.1
+version: 1.2
 status: approved-template
 language: en-US
-last_updated: 2026-08-10
+last_updated: 2026-08-30
 runtime: Claude Code
 scope:
   - Claude Code adapter installation
@@ -16,6 +16,8 @@ authority_note: This README is operator guidance for installing the Claude Code 
 ---
 
 # Claude Code Runtime Adapter
+
+When a material boundary needs runtime enforcement, use Claude Code's native permission configuration where appropriate: permission modes and explicit allowed/disallowed tools can reduce reliance on prompt wording. Configure the narrowest suitable controls and verify effective settings; the adapter does not grant permission to cross repository authority or side-effect boundaries.
 
 This directory contains the Claude Code-specific bootstrap for the runtime-neutral `.agents/` software-delivery framework.
 
