@@ -57,19 +57,24 @@ Generalize the repository into a coherent, runtime-neutral Agent Work Governance
 
 ### Governing authority
 
-- Human Request: `TASK AUTHORING / PUBLICATION HANDOFF`, supplied for this task.
-- Existing repository governance, `.agents/` control plane, accepted Software behavior, and `Planner-Reviewer Contract.md` at the implementation baseline.
-- Open Agent Skills specification: `https://agentskills.io/specification`.
-- Primary external methodology/capability references listed under Dependencies.
+- Human Request and Planner-approved Agent Work Governance delivery objective in the publication handoff.
+- Canonical repository governance at the implementation baseline, including `.agents/AGENTS.md` and the normative `.agents/software-workflow.md`.
+- Other repository authority explicitly approved by the Planner/Reviewer for this objective, if any, recorded in the governing review decision.
+
+### Supporting inputs and evidence
+
+- Accepted Software behavior at `7c4f648207bd6f65f4afdf917547635feef2c56d`, treated as implementation-baseline evidence and a preservation target because the governing objective requires preserving it. This observed accepted state is not standalone intended authority.
+- `Planner-Reviewer Contract.md`, treated as the portable standard-ChatGPT Planner/Reviewer bootstrap/meta-contract, procedural/supporting artifact, and preservation target. Its repository presence alone does not make it canonical repository authority.
+- External methodology, capability, interoperability, and operational references listed under Dependencies. Their usefulness or acceptance as evidence does not make them repository governance authority.
 
 ### Requirement traceability
 
-- `CORE` → cross-domain invariants: authority/evidence separation, bounded contracts, distinct task and implementation identities, review, verification, remediation/replanning, acceptance, side-effect boundaries, and progressive context.
-- `PROFILE` → Software preservation and Scientific research governance semantics.
-- `METHODOLOGY` → external Superpowers and Science Superpowers references, without duplication.
-- `CAPABILITY / SKILL` → external Scientific Agent Skills references, without governance authority.
+- `CORE` → cross-domain invariants required by the Human Request and applicable canonical repository authority: authority/evidence separation, bounded contracts, distinct task and implementation identities, review, verification, remediation/replanning, acceptance, side-effect boundaries, and progressive context.
+- `PROFILE` → Software preservation and Scientific research governance semantics required by the governing objective.
+- `METHODOLOGY` → external Superpowers and Science Superpowers supporting references, without duplication or authority transfer.
+- `CAPABILITY / SKILL` → external Scientific Agent Skills supporting capability reference, without governance authority.
 - `RUNTIME ADAPTER` → runtime-specific entry and deterministic enforcement only; governance remains repository-owned.
-- `RENAME` → future preparation only; no remote rename in this task.
+- `RENAME` → future preparation only, constrained by the governing objective and supported by external operational evidence; no remote rename in this task.
 
 ## Scope
 
