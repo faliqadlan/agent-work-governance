@@ -191,6 +191,27 @@ For every frontmatter artifact substantively changed and version-bumped in `ea64
 
 The R10–R12 remediation must preserve all R1–R9 requirements, validated-task state, authority taxonomy, accepted-baseline semantics, lifecycle semantics, and side-effect boundaries. It must modify implementation/documentation surfaces only within the same bounded integrity objective.
 
+### Third bounded remediation: R13
+
+Implementation review at `b120e7d5e8f66e1df17b4b011966397a56df415a` found one narrow residual gap in R11 closure. R10 and R12 are substantively closed. Continue under the same `.agents framework integrity and verifiability` umbrella objective; do not create a new top-level task.
+
+#### R13 — Exact tree-form retained-source regression protection
+
+Strengthen R11 so the exact historical multiline/tree-form retained-source defect is tested and detected. The invalid representation is structurally equivalent to:
+
+```text
+runtime-adapters/
+    └── antigravity/
+        └── rules/
+            └── code-agent-workflow.md
+```
+
+The valid retained tree uses `antigravity-code-agent-workflow.md` beneath `runtime-adapters/antigravity/rules/`, while the distinct materialized target remains `.agents/rules/code-agent-workflow.md`.
+
+Add a focused fixture that mutates or constructs the `Typical resulting repository` tree with the materialized filename as the retained source, verify that the checker fails with an actionable diagnostic identifying the retained-source naming problem, and verify that the restored valid tree passes. Preserve contiguous full-path detection and all prior manifest, identity, reordering, version, link, source/target, placeholder, and PowerShell regression coverage. Prefer a simple focused tree-block or line/state check; do not introduce a general Markdown parser or unrelated dependency.
+
+The R13 remediation must preserve R1–R12 semantics, validated-task state, authority taxonomy, accepted-baseline semantics, lifecycle semantics, and side-effect boundaries.
+
 ## Scope
 
 ### In scope
@@ -282,6 +303,7 @@ The R10–R12 remediation must preserve all R1–R9 requirements, validated-task
 - [ ] Every Antigravity retained-source depiction identifies `.agents/runtime-adapters/antigravity/rules/antigravity-code-agent-workflow.md`, while every materialized-target depiction identifies `.agents/rules/code-agent-workflow.md`; relative/tree/prose/link/full-path forms do not conflate them.
 - [ ] A focused fixture that uses the materialized target filename as the Antigravity retained source fails the consistency check with an actionable diagnostic, while all prior regression classes remain green.
 - [ ] Every frontmatter artifact substantively changed and version-bumped in the implementation review basis has a truthful `last_updated` date for this remediation lineage, and untouched artifacts are not date-bumped cosmetically.
+- [ ] The exact historical multiline/tree-form retained-source fixture fails deterministically with an actionable diagnostic, the valid retained-source tree passes, and contiguous full-path source/target regression protection remains intact.
 
 ## Verification requirements
 
@@ -297,6 +319,7 @@ The R10–R12 remediation must preserve all R1–R9 requirements, validated-task
 - Audit the complete Antigravity README and directly related package documentation for stale retained-source depictions in tree, relative, prose, linked, and full-path forms.
 - Run the focused source/target documentation fixture and record its actionable failure, then run the valid repository and all previously passing regression fixtures.
 - Inspect `last_updated`, version, and status metadata for every substantively changed frontmatter artifact and record the applicable update date.
+- Record the exact malformed multiline/tree fixture, the checker diagnostic, why it represents the historical `Typical resulting repository` defect, the restored valid-tree result, and all existing regression results.
 
 ### Required evidence
 
