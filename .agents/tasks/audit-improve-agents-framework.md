@@ -165,6 +165,32 @@ Remove or reconcile Draft-era wording in `Remaining approval requirements`, incl
 
 The non-blocking future improvements of broad context-budget instrumentation, a large behavioral-evaluation framework, and automatic runtime-documentation freshness infrastructure are not required for this remediation unless an existing lightweight mechanism makes one directly justified and trivial. This remediation must not become a framework rewrite.
 
+### Second bounded remediation: R10–R12
+
+Implementation review at `ea64794902635c4d55b4ebc81af03a38a085bd06` found the following bounded corrections within the same `.agents framework integrity and verifiability` objective. Continue from that review basis; do not create a new top-level task.
+
+#### R10 — Antigravity retained-source documentation integrity
+
+Correct every retained-source depiction in `.agents/runtime-adapters/antigravity/README.md` and directly related package documentation so it identifies the retained source as:
+
+`.agents/runtime-adapters/antigravity/rules/antigravity-code-agent-workflow.md`
+
+and identifies the materialized Workspace Rule target as:
+
+`.agents/rules/code-agent-workflow.md`
+
+In particular, correct any typical-repository tree, relative path, prose, link, or full-path depiction that incorrectly uses `rules/code-agent-workflow.md` under `runtime-adapters/antigravity/`. Do not normalize the retained source and materialized target into one name.
+
+#### R11 — Strengthen source/target regression validation
+
+Strengthen the deterministic consistency validation proportionately so it checks semantic retained-source identity rather than only one exact stale full-path string. Add focused regression evidence showing that a fixture depicting the Antigravity retained source with the materialized target filename fails with an actionable diagnostic. Preserve the currently passing manifest path/version, README reference/link, canonical-artifact reordering, missing/duplicate identity, placeholder, and source/materialization checks. Do not build a general Markdown parser unless genuinely necessary.
+
+#### R12 — Truthful `last_updated` metadata
+
+For every frontmatter artifact substantively changed and version-bumped in `ea64794902635c4d55b4ebc81af03a38a085bd06`, reconcile `last_updated` to the actual applicable update date for this remediation lineage. At minimum inspect `.agents/AGENTS.md`, `.agents/software-workflow.md`, `.agents/prompts/plan-create-task.md`, `.agents/tasks/_template.md`, `.agents/runtime-adapters/codex/README.md`, `.agents/runtime-adapters/claude/README.md`, and `.agents/runtime-adapters/antigravity/README.md`. Do not change dates on artifacts not substantively updated merely for cosmetic synchronization. A heavyweight Git-history-dependent date validator is not required.
+
+The R10–R12 remediation must preserve all R1–R9 requirements, validated-task state, authority taxonomy, accepted-baseline semantics, lifecycle semantics, and side-effect boundaries. It must modify implementation/documentation surfaces only within the same bounded integrity objective.
+
 ## Scope
 
 ### In scope
@@ -253,6 +279,9 @@ The non-blocking future improvements of broad context-budget instrumentation, a 
 - [ ] Consistency checking does not rely on manifest array position, and regression tests cover manifest reordering and source/materialization conflation.
 - [ ] Regression execution does not depend on hard-coded Windows PowerShell.
 - [ ] Existing previously passing integrity checks remain green, and `main` remains unchanged.
+- [ ] Every Antigravity retained-source depiction identifies `.agents/runtime-adapters/antigravity/rules/antigravity-code-agent-workflow.md`, while every materialized-target depiction identifies `.agents/rules/code-agent-workflow.md`; relative/tree/prose/link/full-path forms do not conflate them.
+- [ ] A focused fixture that uses the materialized target filename as the Antigravity retained source fails the consistency check with an actionable diagnostic, while all prior regression classes remain green.
+- [ ] Every frontmatter artifact substantively changed and version-bumped in the implementation review basis has a truthful `last_updated` date for this remediation lineage, and untouched artifacts are not date-bumped cosmetically.
 
 ## Verification requirements
 
@@ -265,6 +294,9 @@ The non-blocking future improvements of broad context-budget instrumentation, a 
 - Review relevant runtime-adapter source/README claims against current primary runtime documentation and report any limitation where live runtime behavior cannot be exercised.
 - Run any existing repository checks that materially cover the changed artifacts; do not invent CI evidence.
 - Verify no changes occurred on `main`, no unrelated files were altered, and no root/runtime-native materialization was introduced.
+- Audit the complete Antigravity README and directly related package documentation for stale retained-source depictions in tree, relative, prose, linked, and full-path forms.
+- Run the focused source/target documentation fixture and record its actionable failure, then run the valid repository and all previously passing regression fixtures.
+- Inspect `last_updated`, version, and status metadata for every substantively changed frontmatter artifact and record the applicable update date.
 
 ### Required evidence
 
