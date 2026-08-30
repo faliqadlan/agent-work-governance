@@ -2,14 +2,14 @@
 title: Audit and Improve the Repository Agents Framework
 document_id: AGENT-TASK-AUDIT-001
 version: 1.0
-status: draft
+status: Validated/Published
 language: en-US
 last_updated: 2026-08-30
 scope:
   - .agents framework integrity
   - directly related published package documentation
   - bounded consistency and regression verification
-authority_note: This Draft is a candidate delivery contract awaiting Planner/Reviewer inspection. It does not authorize implementation until it is approved and published as Validated/Published with an immutable governing revision.
+authority_note: This Validated/Published task is a bounded delivery contract. It authorizes only the implementation scope explicitly defined here, subject to applicable repository authority, the exact immutable governing task revision, and all stated approval and side-effect boundaries.
 ---
 
 # Executable Task
@@ -20,7 +20,7 @@ authority_note: This Draft is a candidate delivery contract awaiting Planner/Rev
 
 **Task path:**  `.agents/tasks/audit-improve-agents-framework.md`
 
-**Task contract state:**  `Draft`
+**Task contract state:**  `Validated/Published`
 
 **Delivery objective / Work Package / MVP:**  `.agents framework integrity and verifiability`
 
@@ -36,9 +36,9 @@ The task exists because the audited baseline contains confirmed metadata and pat
 
 **Implementation baseline:**  `b5c82736701e009bc2e90f30d13a88f28bbcbed5` (`main` audited baseline; execution must verify the actual applicable baseline before implementation)
 
-**Task revision:**  `resolved when published`
+**Task revision:**  `the exact immutable Git revision containing this Validated/Published task content, supplied externally by the publication record and Planner/Reviewer handoff`
 
-This task remains Draft. It MUST NOT be treated as Validated/Published or executed until Planner/Reviewer establishes the exact immutable governing revision containing the approved task.
+The exact governing task revision is resolved externally by the publication record and Planner/Reviewer handoff. The task body does not embed its own future commit SHA. Execution MUST use that exact immutable published task revision together with the applicable implementation baseline; the task path alone is insufficient when the governing revision is ambiguous.
 
 ## Objective
 
