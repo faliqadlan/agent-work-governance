@@ -34,7 +34,7 @@
     {
       "path": ".agents/prompts/plan-create-task.md",
       "document_id": "AGENT-PROMPT-PLAN-001",
-      "version": "2.2",
+      "version": "2.3",
       "status": "approved-template",
       "role": "planner-reviewer-orchestration"
     },
@@ -80,10 +80,10 @@
       "status": "approved-template",
       "source_files": [
         ".agents/runtime-adapters/antigravity/README.md",
-        ".agents/runtime-adapters/antigravity/rules/code-agent-workflow.md"
+        ".agents/runtime-adapters/antigravity/rules/antigravity-code-agent-workflow.md"
       ],
       "bootstrap": {
-        "source": ".agents/runtime-adapters/antigravity/rules/code-agent-workflow.md",
+        "source": ".agents/runtime-adapters/antigravity/rules/antigravity-code-agent-workflow.md",
         "materialization_target": ".agents/rules/code-agent-workflow.md",
         "activation": "Always On"
       }

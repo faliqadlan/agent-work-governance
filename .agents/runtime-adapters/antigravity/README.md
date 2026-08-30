@@ -39,10 +39,10 @@ The Antigravity adapter does not redefine that framework.
 runtime-adapters/antigravity/
 ├── README.md
 └── rules/
-    └── code-agent-workflow.md
+    └── antigravity-code-agent-workflow.md
 ```
 
-### `rules/code-agent-workflow.md`
+### `rules/antigravity-code-agent-workflow.md`
 
 The adapter rule is intended to be materialized as:
 
@@ -291,7 +291,7 @@ Hooks and Project-level permission conflicts are assessed separately because the
 Copy:
 
 ```text
-.agents/runtime-adapters/antigravity/rules/code-agent-workflow.md
+.agents/runtime-adapters/antigravity/rules/antigravity-code-agent-workflow.md
 ```
 
 to:
@@ -307,7 +307,7 @@ Then configure the materialized rule as **Always On**.
 Compare it with the adapter source under:
 
 ```text
-.agents/runtime-adapters/antigravity/rules/code-agent-workflow.md
+.agents/runtime-adapters/antigravity/rules/antigravity-code-agent-workflow.md
 ```
 
 If the materialized rule is current and unmodified, no content merge is required.
