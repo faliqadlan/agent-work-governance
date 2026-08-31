@@ -1,7 +1,7 @@
 ---
 title: Generalize the Repository into Agent Work Governance
 document_id: AGENT-TASK-WORK-GOV-001
-version: 1.2
+version: 1.3
 status: Validated/Published
 language: en-US
 last_updated: 2026-08-31
@@ -104,9 +104,9 @@ Both packages must embody, in substance, these cross-domain invariants:
 - `RUNTIME ADAPTER` -> runtime-specific entry and deterministic enforcement only; governance remains package-owned.
 - `RENAME` -> future preparation only, constrained by the governing objective and supported by external operational evidence; no remote rename in this task.
 
-## Bounded remediation: AWG-R1 and AWG-R2
+## Bounded remediation: AWG-R1, AWG-R2, and AWG-R3
 
-Implementation review at `02d014aea7f791f094ce6894eef8ded6731c5b1b` found the following bounded corrections within the same `AGENT-TASK-WORK-GOV-001` delivery objective. Continue from that review basis; do not create a new top-level task or redesign the two-template architecture.
+Implementation review at `02d014aea7f791f094ce6894eef8ded6731c5b1b` found bounded corrections AWG-R1 and AWG-R2, and PR integration review of `faliqadlan/code-agent-template#2` at `e885152cda482bbf767283285daac41ca120f5b2` identified integration finding AWG-R3 within the same `AGENT-TASK-WORK-GOV-001` delivery objective. Continue from that review basis; do not create a new top-level task or redesign the two-template architecture.
 
 ### AWG-R1 — Protect shared invariants in substance
 
@@ -157,15 +157,62 @@ Requirements:
 * restore the valid README and prove the check passes;
 * preserve all existing regression protections.
 
+### AWG-R3 — Reconcile repository-internal governance after two-template migration
+
+Requirements:
+
+1. Remove all live repository-internal root `.agents` references to superseded/nonexistent architecture, including:
+
+   * `.agents/core-governance.md`
+   * `.agents/profiles/...`
+   * runtime Software/Scientific profile selection assumptions.
+
+2. Reconcile root internal governance with the accepted final architecture:
+
+   * distributable products are `templates/software/.agents/` and `templates/scientific/.agents/`;
+   * shared Core is conceptual, not a mandatory physical runtime artifact;
+   * root `.agents/` exists only to govern the Agent Work Governance distribution repository itself.
+
+3. Reconcile at minimum:
+
+   * `.agents/AGENTS.md`
+   * `.agents/context/project.md`
+   * `.agents/prompts/plan-create-task.md`
+   * root Codex adapter
+   * root Claude adapter
+   * root Antigravity adapter
+   * `.agents/manifest.json`
+
+4. Remove stale transition/generalization wording where it would become false immediately after this PR is merged.
+
+5. Do not modify the accepted Software template merely to make root governance symmetrical.
+
+6. Do not modify Scientific governance unless required by an actual directly related defect.
+
+7. Add bounded repository-level regression protection proving retained root governance contains no live references to:
+
+   * `core-governance.md`
+   * `.agents/profiles/`
+   * runtime selected-profile architecture.
+
+8. Preserve:
+
+   * `templates/software/.agents/`
+   * `templates/scientific/.agents/`
+   * external-reference-only methodology boundaries;
+   * Planner-Reviewer Contract portability;
+   * all AWG-R1/R2 protections.
+
 ### Additional verification for remediation
 
-After later implementation of AWG-R1 and AWG-R2, require:
+After later implementation of AWG-R1, AWG-R2, and AWG-R3, require:
 
-* `& ./tests/check-two-template-governance.ps1`
-* `& ./templates/software/.agents/check-consistency.ps1`
-* `& ./templates/scientific/.agents/check-consistency.ps1`
-* `& ./tests/check-agents-consistency.Tests.ps1`
-* `git diff --check`
+* existing full regression suite;
+* Software standalone checker;
+* Scientific standalone checker;
+* two-template repository checker;
+* new root-governance stale-reference fixture;
+* `git diff --check`.
 
 All required checks must report observed success.
 
