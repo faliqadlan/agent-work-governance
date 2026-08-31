@@ -1,10 +1,10 @@
 ---
 title: Antigravity Runtime Adapter Setup
 document_id: AGENT-RUNTIME-ANTIGRAVITY-README-001
-version: 1.3
+version: 1.2
 status: approved-template
 language: en-US
-last_updated: 2026-08-31
+last_updated: 2026-08-30
 runtime: Antigravity
 scope:
   - Antigravity adapter installation

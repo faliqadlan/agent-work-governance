@@ -1,10 +1,10 @@
 ---
 title: Claude Code Runtime Adapter Setup
 document_id: AGENT-RUNTIME-CLAUDE-README-001
-version: 1.3
+version: 1.2
 status: approved-template
 language: en-US
-last_updated: 2026-08-31
+last_updated: 2026-08-30
 runtime: Claude Code
 scope:
   - Claude Code adapter installation
