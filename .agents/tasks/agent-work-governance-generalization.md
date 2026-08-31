@@ -1,7 +1,7 @@
 ---
 title: Generalize the Repository into Agent Work Governance
 document_id: AGENT-TASK-WORK-GOV-001
-version: 1.1
+version: 1.2
 status: Validated/Published
 language: en-US
 last_updated: 2026-08-31
@@ -103,6 +103,82 @@ Both packages must embody, in substance, these cross-domain invariants:
 - `CAPABILITY / SKILL` -> external Scientific Agent Skills supporting capability reference, without governance authority.
 - `RUNTIME ADAPTER` -> runtime-specific entry and deterministic enforcement only; governance remains package-owned.
 - `RENAME` -> future preparation only, constrained by the governing objective and supported by external operational evidence; no remote rename in this task.
+
+## Bounded remediation: AWG-R1 and AWG-R2
+
+Implementation review at `02d014aea7f791f094ce6894eef8ded6731c5b1b` found the following bounded corrections within the same `AGENT-TASK-WORK-GOV-001` delivery objective. Continue from that review basis; do not create a new top-level task or redesign the two-template architecture.
+
+### AWG-R1 — Protect shared invariants in substance
+
+Current repository-level validation checks only that the ten shared invariant marker names exist in each manifest.
+
+That is insufficient because removal of substantive governance text could leave the manifest markers untouched.
+
+Add proportionate deterministic evidence that each required shared invariant remains substantively represented in both Software and Scientific canonical governance.
+
+Use package-specific semantic anchors, section evidence, or similarly bounded deterministic checks.
+
+Requirements:
+
+* do NOT use full-text equality between Software and Scientific;
+* do NOT require identical domain wording;
+* do NOT build a generic generator/schema framework merely for DRY;
+* each of the ten shared invariants must map to sufficient canonical evidence in each package;
+* removing or materially breaking the substantive evidence for an invariant while leaving its manifest marker intact must cause a deterministic actionable failure;
+* add focused negative regression fixtures proving this behavior for at least representative Software and Scientific invariants;
+* restore the valid artifact and prove the corresponding check passes;
+* preserve all current standalone-copy and package consistency checks.
+
+Expected diagnostic should identify:
+
+* package;
+* invariant marker;
+* missing/invalid semantic evidence.
+
+### AWG-R2 — Restore README version-drift regression protection
+
+The accepted baseline had README version-drift protection.
+
+The first implementation test commit introduced a robust dynamic README mutation fixture, but the final implementation no longer contains it.
+
+The root README still mirrors canonical Software and Scientific artifact versions, so mirror drift remains possible.
+
+Add repository-level deterministic validation that the README's mirrored canonical version entries agree with the corresponding package manifests.
+
+Requirements:
+
+* do not make standalone package checkers depend on the source repository README;
+* perform this at repository-level validation/tests;
+* derive expected versions from the current Software and Scientific package manifests;
+* locate mirrored README entries deterministically;
+* fail when an expected mirrored entry is missing, duplicated, or has a mismatched version;
+* add a negative fixture that reads the current version, verifies exactly one intended match, mutates it to a deterministic different value, and asserts an actionable version-drift failure;
+* do not hard-code the current version number;
+* restore the valid README and prove the check passes;
+* preserve all existing regression protections.
+
+### Additional verification for remediation
+
+After later implementation of AWG-R1 and AWG-R2, require:
+
+* `& ./tests/check-two-template-governance.ps1`
+* `& ./templates/software/.agents/check-consistency.ps1`
+* `& ./templates/scientific/.agents/check-consistency.ps1`
+* `& ./tests/check-agents-consistency.Tests.ps1`
+* `git diff --check`
+
+All required checks must report observed success.
+
+Also rerun isolated standalone copies for both packages.
+
+Verify:
+
+* Software canonical behavior remains faithful to accepted baseline;
+* Scientific governance semantics remain unchanged except where required for deterministic semantic evidence;
+* no external methodology or skills were copied;
+* no runtime profile selector or physical shared core is introduced;
+* remote `main` remains `7c4f648207bd6f65f4afdf917547635feef2c56d`;
+* no repository rename, PR, merge, release, deployment, or other unauthorized side effect occurs.
 
 ## Scope
 
