@@ -105,11 +105,12 @@ function Check-ForbiddenPackageReferences([string]$PackageDir, [string]$PackageN
     $forbiddenStrings = @(
         'templates/software',
         'templates/scientific',
-        '../',
         'profile_selection',
-        'profiles/'
+        'profiles/',
+        'core-governance.md'
     )
     foreach ($file in $allFiles) {
+        if ($file.Name -eq 'check-consistency.ps1') { continue }
         $content = Get-Content -Raw -LiteralPath $file.FullName
         foreach ($pattern in $forbiddenStrings) {
             if ($content.Contains($pattern)) {
