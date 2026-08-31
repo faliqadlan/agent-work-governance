@@ -6,7 +6,7 @@
 
 **Architecture:** Build two complete package roots, `templates/software/.agents/` and `templates/scientific/.agents/`. Each package owns its entry contract, normative workflow, context, Planner/Reviewer procedure, task/research-contract template, manifest, checker, and thin runtime adapters. The root `.agents/` is transition-only and is removed as a product package after its governing task is preserved in history and final validation no longer depends on it.
 
-**Tech Stack:** Markdown, JSON, dependency-free PowerShell scripts executed directly by `powershell`, and Git. No Pester installation or test-framework migration is introduced.
+**Tech Stack:** Markdown, JSON, dependency-free PowerShell scripts executed with the current supported PowerShell host (e.g., `pwsh` or current PowerShell session), and Git. No Pester installation or test-framework migration is introduced.
 
 **Spec:** `docs/superpowers/specs/2026-08-31-two-template-agent-work-governance-design.md`
 
@@ -24,7 +24,7 @@
 
 **Files:** Modify `tests/check-agents-consistency.Tests.ps1`; create `tests/check-two-template-governance.ps1`.
 
-**Interfaces:** Existing regression script remains directly executable. The new script returns exit code 0 only when both package roots and all shared invariants pass.
+**Interfaces:** Existing regression script remains directly executable. The new script returns exit code 0 only when both package roots and all shared invariants pass. Host invocation uses the current PowerShell host (e.g. `& ./<script>.ps1` in a PowerShell session, or `<supported-pwsh-host> -NoProfile -File <script>.ps1` when invoked externally without assuming `powershell.exe`).
 
 - [ ] Replace the stale fixture with helper `Get-ExactReadmeVersion`: read `README.md`, match ``| `prompts/plan-create-task.md` | <version> |`` exactly once, and throw if the match count is not one.
 - [ ] Derive an invalid value from the found source (for example `"$sourceVersion-invalid"`), replace the exact full row once, assert replacement count is one, run the checker, and assert exit code 1 plus the diagnostic beginning `README version for 'prompts/plan-create-task.md'`.
@@ -33,35 +33,38 @@
 - [ ] Add equivalent Scientific required-path and standalone checks; fail on `templates/software`, `templates/scientific`, `../`, `profile_selection`, or `profiles/` references inside either package.
 - [ ] Define shared marker names: `authority-vs-evidence`, `external-imperative-not-authority`, `planner-reviewer-executor`, `bounded-contract`, `governing-revision`, `implementation-or-execution-baseline`, `remediation-vs-replanning`, `evidence-before-acceptance`, `acceptance-not-consequential-authorization`, and `progressive-context-runtime-neutrality`. Compare marker presence, not full text.
 - [ ] Add a forbidden-content check for copied Superpowers, Science Superpowers, or Scientific Agent Skills files and mandatory root-core paths.
-- [ ] Run `powershell -NoProfile -File tests/check-two-template-governance.ps1`; observe missing-package diagnostics and exit code 1. Run `powershell -NoProfile -File tests/check-agents-consistency.Tests.ps1`; observe the existing suite executes without Pester.
+- [ ] Run `& ./tests/check-two-template-governance.ps1`; observe missing-package diagnostics and exit code 1. Run `& ./tests/check-agents-consistency.Tests.ps1`; observe the existing suite executes without Pester.
 - [ ] Stage exactly the two test files and commit `test: define direct two-template governance validation`.
 
 ### Task 2: Materialize Software from the accepted baseline
 
 **Destination:** `templates/software/.agents/`.
 
-**Source-to-destination mapping from `7c4f648207bd6f65f4afdf917547635feef2c56d`:**
+**Source-to-destination mapping and provenance:**
 
-| Accepted source | Software destination | Treatment |
-|---|---|---|
-| `.agents/AGENTS.md` | `templates/software/.agents/AGENTS.md` | Relocate; package-local Software links only; retain `AGENTS-CONTRACT-001`, version `1.4`. |
-| `.agents/software-workflow.md` | `templates/software/.agents/software-workflow.md` | Relocate with path-only changes; retain `SD-PROTOCOL-001`, version `2.3`, B0–G10 semantics. |
-| `.agents/context/project.md` | `templates/software/.agents/context/project.md` | Relocate with package-local paths; retain `AGENT-CONTEXT-001`, version `1.2`. |
-| `.agents/prompts/plan-create-task.md` | `templates/software/.agents/prompts/plan-create-task.md` | Relocate with package-local references; retain `AGENT-PROMPT-PLAN-001`, version `2.5`. |
-| `.agents/tasks/_template.md` | `templates/software/.agents/tasks/_template.md` | Relocate with package-local references; retain `AGENT-TASK-001`, version `1.3`. |
-| `.agents/manifest.json` | `templates/software/.agents/manifest.json` | Replace universal inventory with Software-only inventory; retain continuous IDs/versions. |
-| `.agents/check-consistency.ps1` | `templates/software/.agents/check-consistency.ps1` | Relocate; resolve from `$PSScriptRoot`; preserve version/link/adapter/source-materialization checks. |
-| `.agents/runtime-adapters/codex/{AGENTS.md,README.md}` | Same relative paths below Software destination | Relocate; retain version `1.3`, source/materialization distinction, and package-local links. |
-| `.agents/runtime-adapters/claude/{CLAUDE.md,README.md}` | Same relative paths below Software destination | Relocate; retain version `1.3` and `@` materialization rewrite. |
-| `.agents/runtime-adapters/antigravity/{README.md,rules/antigravity-code-agent-workflow.md}` | Same relative paths below Software destination | Relocate; retain source filename versus materialized `code-agent-workflow.md`, version `1.3`. |
-| `.agents/tasks/audit-improve-agents-framework.md` | Software tasks directory only if adoption requires it | Relocate only if package-local references remain valid; otherwise classify as transition-only. |
-| Existing regression semantics | Software cases in `tests/check-two-template-governance.ps1` | Preserve behavior; do not copy tests into the adopted package. |
+Start from exact accepted artifacts at `7c4f648207bd6f65f4afdf917547635feef2c56d`. Distinguish accepted baseline identities and versions from unaccepted, optional WIP improvements from `43e53bde5774ce5d4e3fbf4a447c3ae2f2b3e183`. Do not inherit WIP versions merely because they exist on the branch; assign new versions only if substantive changes are made under repository versioning conventions.
+
+| Accepted source (`7c4f648...`) | Accepted ID / Version | Software destination | Optional reusable WIP improvement (`43e53bde...`) | Implementation treatment & versioning |
+|---|---|---|---|---|
+| `.agents/AGENTS.md` | `AGENTS-CONTRACT-001` v1.3 | `templates/software/.agents/AGENTS.md` | Imperative-as-evidence wording; methodology/capability boundary clarification. (Reject root core / profile selector). | Relocate with package-local paths; preserve `AGENTS-CONTRACT-001`. Evaluate WIP wording improvements independently; bump to `1.4` only if substantive changes are adopted. |
+| `.agents/software-workflow.md` | `SD-PROTOCOL-001` v2.3 | `templates/software/.agents/software-workflow.md` | None (WIP preserved v2.3). | Relocate with package-local link updates; preserve `SD-PROTOCOL-001` version `2.3` and full B0–G10 lifecycle semantics. |
+| `.agents/context/project.md` | `AGENT-CONTEXT-001` v1.1 | `templates/software/.agents/context/project.md` | Minor context-guidance phrasing. (Reject profile selector references). | Relocate with package-local paths; preserve `AGENT-CONTEXT-001`. Evaluate WIP improvements; bump to `1.2` only if substantive changes are made, otherwise retain `1.1`. |
+| `.agents/prompts/plan-create-task.md` | `AGENT-PROMPT-PLAN-001` v2.4 | `templates/software/.agents/prompts/plan-create-task.md` | Orchestration checklist clarity. (Reject core/profile loading). | Relocate with package-local references; preserve `AGENT-PROMPT-PLAN-001`. Evaluate WIP improvements; bump to `2.5` only if substantive changes are made, otherwise retain `2.4`. |
+| `.agents/tasks/_template.md` | `AGENT-TASK-001` v1.2 | `templates/software/.agents/tasks/_template.md` | Minor contract phrasing. (Reject domain-neutral generalization). | Relocate with package-local references; preserve `AGENT-TASK-001`. Evaluate WIP improvements; bump to `1.3` only if substantive changes are made, otherwise retain `1.2`. |
+| `.agents/manifest.json` | Manifest schema v3 (software baseline inventory) | `templates/software/.agents/manifest.json` | Invariant markers array, structured checks. (Reject universal profile inventory). | Create Software-only inventory reflecting exact Software package artifacts and continuous versions; define shared invariant marker names. |
+| `.agents/check-consistency.ps1` | Baseline consistency checker | `templates/software/.agents/check-consistency.ps1` | Enhanced adapter, mirror, and invariant checks adapted for standalone execution. | Relocate; execute standalone relative to `$PSScriptRoot`; preserve version/link/adapter/materialization checks without source-tree coupling. |
+| `.agents/runtime-adapters/codex/{AGENTS.md,README.md}` | Codex adapter v1.2 (`AGENT-RUNTIME-CODEX-001` v1.2, `AGENT-RUNTIME-CODEX-README-001` v1.2) | `templates/software/.agents/runtime-adapters/codex/{AGENTS.md,README.md}` | Methodology subordination clarity. (Reject profile selector references). | Relocate below Software destination; preserve document IDs; bump to `1.3` only if substantive changes are made; preserve source/materialization distinctions and package-local links. |
+| `.agents/runtime-adapters/claude/{CLAUDE.md,README.md}` | Claude adapter v1.2 (`AGENT-RUNTIME-CLAUDE-README-001` v1.2, CLAUDE.md v1.2) | `templates/software/.agents/runtime-adapters/claude/{CLAUDE.md,README.md}` | Methodology subordination clarity. (Reject profile selector references). | Relocate below Software destination; preserve document IDs; bump to `1.3` only if substantive changes are made; preserve `@` materialization rewrite. |
+| `.agents/runtime-adapters/antigravity/{README.md,rules/antigravity-code-agent-workflow.md}` | Antigravity adapter v1.2 (`AGENT-RUNTIME-ANTIGRAVITY-README-001` v1.2, rule v1.2) | `templates/software/.agents/runtime-adapters/antigravity/{README.md,rules/antigravity-code-agent-workflow.md}` | Methodology subordination clarity. (Reject profile selector references). | Relocate below Software destination; preserve document IDs; bump to `1.3` only if substantive changes are made; preserve source filename versus materialized `code-agent-workflow.md`. |
+| `.agents/tasks/audit-improve-agents-framework.md` | Historic task artifact | Transition-only (root `.agents/tasks/`) | N/A | Retain in repository root during transition if needed; do not copy into adopted Software package. |
+| Existing regression semantics | `tests/check-agents-consistency.Tests.ps1` | Repository-level `tests/` | Stale-fixture refactoring | Preserve existing behavior in repository-level tests; do not copy tests into adopted package. |
 
 - [ ] Create the destination tree and use `git show 7c4f648...:<path>` as content reference. Do not copy `core-governance.md` or the Scientific profile.
 - [ ] Edit links and adapter materialization text to resolve from an adopted package root. Preserve Business/Product/Requirements/Architecture, E6/V7/R8/A9, review, baseline, integration, release, provenance, and side-effect semantics.
+- [ ] Re-evaluate WIP wording changes from `43e53bde...` independently; apply only compatible improvements and set versions/dates strictly based on substantive changes according to repository conventions.
 - [ ] Define manifest canonical artifacts, continuous IDs/versions, adapter mappings, and the shared marker names from Task 1.
 - [ ] Implement the checker with stable diagnostics for missing artifacts, duplicate IDs, version/mirror drift, broken paths, stale Antigravity source depiction, selectors, source-tree dependencies, and vendored external methodology.
-- [ ] Run `powershell -NoProfile -File templates/software/.agents/check-consistency.ps1`; expect exit code 0. Run the direct repository checker; expect only Scientific/root-migration failures.
+- [ ] Run `& ./templates/software/.agents/check-consistency.ps1`; expect exit code 0. Run `& ./tests/check-two-template-governance.ps1`; expect only Scientific/root-migration failures.
 - [ ] Stage exactly `templates/software/.agents`; commit `feat: add standalone software governance template`.
 
 ### Task 3: Create the Scientific package with explicit canonical artifacts
@@ -84,7 +87,7 @@
 - [ ] Write context, Planner/Reviewer procedure, and Scientific task template using the IDs above and package-relative links. Separate research-contract revision, execution/analysis baseline, and result identity.
 - [ ] Implement manifest/checker with required paths, unique IDs, versions, markers, only the external URLs `K-Dense-AI/science-superpowers` and `K-Dense-AI/scientific-agent-skills`, and diagnostics for missing Scientific safeguards.
 - [ ] Adapt `.agents/profiles/scientific-governance.md` into `research-governance.md`; classify the old profile path as superseded, never as a selector.
-- [ ] Run `powershell -NoProfile -File templates/scientific/.agents/check-consistency.ps1`; expect exit code 0. Run the direct repository checker; expect both standalone package checks to pass before cleanup.
+- [ ] Run `& ./templates/scientific/.agents/check-consistency.ps1`; expect exit code 0. Run `& ./tests/check-two-template-governance.ps1`; expect both standalone package checks to pass before cleanup.
 - [ ] Stage exactly `templates/scientific/.agents`; commit `feat: add standalone scientific governance template`.
 
 ### Task 4: Sequence root cleanup and update adoption documentation
@@ -96,7 +99,7 @@
 - [ ] Remove root `.agents/check-consistency.ps1` only after package checkers and `tests/check-two-template-governance.ps1` replace its product checks. If retained for transition inspection, rename/document it as internal-only and never use it as an adopted-package checker.
 - [ ] Rewrite README tables and links to show only `templates/software/.agents/ -> <software-repository>/.agents/` and `templates/scientific/.agents/ -> <scientific-repository>/.agents/`; explain manual/lightweight copying and why GitHub native templates cannot select nested packages.
 - [ ] Remove claims that both domains load; retain external URLs only as references; keep `Planner-Reviewer Contract.md` one portable contract.
-- [ ] Run `powershell -NoProfile -File tests/check-two-template-governance.ps1`; if the internal root checker remains, also run `powershell -NoProfile -File tests/check-agents-consistency.Tests.ps1`; all must exit 0 with no root coupling diagnostics.
+- [ ] Run `& ./tests/check-two-template-governance.ps1`; if the internal root checker remains, also run `& ./tests/check-agents-consistency.Tests.ps1`; all must exit 0 with no root coupling diagnostics.
 - [ ] Review `git diff --cached --name-status`, stage only selected README/tests/root changes, and commit `refactor: migrate governance to standalone templates`.
 
 ### Task 5: External review and final verification
@@ -104,7 +107,7 @@
 **Files:** Modify only concrete defects in package artifacts, tests, or adoption docs.
 
 - [ ] Recheck primary sources for `obra/superpowers`, `K-Dense-AI/science-superpowers`, `K-Dense-AI/scientific-agent-skills`, GitHub template documentation, and GitHub rename documentation. Record URLs and boundaries; add no source content.
-- [ ] Run directly: `powershell -NoProfile -File tests/check-two-template-governance.ps1`, both package checkers, and `git diff --check`; all must exit 0.
+- [ ] Run directly: `& ./tests/check-two-template-governance.ps1`, `& ./templates/software/.agents/check-consistency.ps1`, `& ./templates/scientific/.agents/check-consistency.ps1` (or via supported PowerShell host), and `git diff --check`; all must exit 0.
 - [ ] Copy each package alone to a fresh temporary target `.agents` directory, run its checker with the source repository unavailable, and remove only that temporary directory.
 - [ ] Run `git rev-parse HEAD`, `git branch --show-current`, `git status --short --branch`, `git rev-parse refs/remotes/origin/main`, `git merge-base --is-ancestor 43e53bde5774ce5d4e3fbf4a447c3ae2f2b3e183 HEAD`, and `git diff --name-status 7c4f648207bd6f65f4afdf917547635feef2c56d HEAD`. Confirm task branch, reachable WIP, unchanged `main`, and no unauthorized side effect.
 - [ ] Report exact outputs, changed files, mappings, root disposition, marker strategy, external-reference strategy, version/date decisions, stale-fixture correction, final/pushed SHAs, limitations, and runtime-testing scope. End with `CORRECTED TWO-TEMPLATE AGENT WORK GOVERNANCE IMPLEMENTATION READY FOR PLANNER/REVIEWER REVIEW`; do not declare acceptance or a new baseline.
