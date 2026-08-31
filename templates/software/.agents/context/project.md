@@ -1,10 +1,10 @@
 ---
 title: Repository Context Template
 document_id: AGENT-CONTEXT-001
-version: 1.2
+version: 1.1
 status: approved-template
 language: en-US
-last_updated: 2026-08-31
+last_updated: 2026-08-10
 scope:
   - repository-level AI orientation
   - repository authority mapping
@@ -15,7 +15,7 @@ authority_note: This file is supporting, refreshable repository context. Approve
 
 # Repository Context
 
-This file is the repository-level context entrypoint for AI-assisted governed work when adopted into a target repository.
+This file is the repository-level context entrypoint for AI-assisted software delivery when adopted into a target repository.
 
 In this repository, it remains an approved reusable template. Its angle-bracket values are intentional placeholders and must be replaced with verified target-repository facts during adoption; they are not claims about this template repository.
 
@@ -193,7 +193,7 @@ Material contradictions MUST be verified against repository authority before use
 
 ## Delivery state
 
-Record the currently verified governed-work state.
+Record the currently verified software-delivery state.
 
 This section is an orientation summary, not a replacement for authoritative delivery-planning artifacts.
 

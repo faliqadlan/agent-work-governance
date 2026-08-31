@@ -1,0 +1,108 @@
+{
+  "schema_version": 3,
+  "manifest_role": "descriptive-inventory",
+  "package_root": ".agents",
+  "path_base": "repository-root",
+  "authority": {
+    "is_authoritative": false,
+    "canonical_contract": ".agents/AGENTS.md",
+    "normative_protocol": ".agents/research-governance.md",
+    "note": "This manifest inventories the repository-local AI scientific research governance package. It does not define or override study authority, research protocol, governing tasks, evidence requirements, approval boundaries, or dissemination boundaries."
+  },
+  "shared_invariants": [
+    "authority-vs-evidence",
+    "external-imperative-not-authority",
+    "planner-reviewer-executor",
+    "bounded-contract",
+    "governing-revision",
+    "implementation-or-execution-baseline",
+    "remediation-vs-replanning",
+    "evidence-before-acceptance",
+    "acceptance-not-consequential-authorization",
+    "progressive-context-runtime-neutrality"
+  ],
+  "external_references": {
+    "scientific_methodology": "https://github.com/K-Dense-AI/science-superpowers",
+    "scientific_capabilities": "https://github.com/K-Dense-AI/scientific-agent-skills"
+  },
+  "canonical_artifacts": [
+    {
+      "path": ".agents/research-governance.md",
+      "document_id": "SCI-RESEARCH-PROTOCOL-001",
+      "version": "1.0",
+      "status": "approved-reference",
+      "role": "normative-research-protocol"
+    },
+    {
+      "path": ".agents/AGENTS.md",
+      "document_id": "SCI-AGENTS-CONTRACT-001",
+      "version": "1.0",
+      "status": "approved-reference",
+      "role": "scientific-agent-governance-contract"
+    },
+    {
+      "path": ".agents/context/project.md",
+      "document_id": "SCI-CONTEXT-001",
+      "version": "1.0",
+      "status": "approved-template",
+      "role": "study-context-entrypoint"
+    },
+    {
+      "path": ".agents/prompts/plan-create-task.md",
+      "document_id": "SCI-PROMPT-PLAN-001",
+      "version": "1.0",
+      "status": "approved-template",
+      "role": "planner-reviewer-orchestration"
+    },
+    {
+      "path": ".agents/tasks/_template.md",
+      "document_id": "SCI-TASK-001",
+      "version": "1.0",
+      "status": "approved-template",
+      "role": "validated-research-task-template"
+    }
+  ],
+  "runtime_adapters": {
+    "codex": {
+      "version": "1.0",
+      "status": "approved-template",
+      "source_files": [
+        ".agents/runtime-adapters/codex/README.md",
+        ".agents/runtime-adapters/codex/AGENTS.md"
+      ],
+      "bootstrap": {
+        "source": ".agents/runtime-adapters/codex/AGENTS.md",
+        "materialization_target": "AGENTS.md"
+      }
+    },
+    "claude": {
+      "version": "1.0",
+      "status": "approved-template",
+      "source_files": [
+        ".agents/runtime-adapters/claude/README.md",
+        ".agents/runtime-adapters/claude/CLAUDE.md"
+      ],
+      "bootstrap": {
+        "source": ".agents/runtime-adapters/claude/CLAUDE.md",
+        "materialization_target": "CLAUDE.md",
+        "materialization_rewrite": {
+          "from": "@../../AGENTS.md",
+          "to": "@.agents/AGENTS.md"
+        }
+      }
+    },
+    "antigravity": {
+      "version": "1.0",
+      "status": "approved-template",
+      "source_files": [
+        ".agents/runtime-adapters/antigravity/README.md",
+        ".agents/runtime-adapters/antigravity/rules/antigravity-code-agent-workflow.md"
+      ],
+      "bootstrap": {
+        "source": ".agents/runtime-adapters/antigravity/rules/antigravity-code-agent-workflow.md",
+        "materialization_target": ".agents/rules/code-agent-workflow.md",
+        "activation": "Always On"
+      }
+    }
+  }
+}

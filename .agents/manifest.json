@@ -1,92 +1,40 @@
 {
   "schema_version": 3,
-  "manifest_role": "descriptive-inventory",
+  "manifest_role": "repository-governance",
   "package_root": ".agents",
   "path_base": "repository-root",
   "authority": {
     "is_authoritative": false,
     "canonical_contract": ".agents/AGENTS.md",
     "normative_protocol": ".agents/software-workflow.md",
-    "note": "This manifest inventories the repository-local AI delivery package. It does not define or override repository authority, delivery protocol, governing tasks, evidence requirements, approval boundaries, or release boundaries."
+    "note": "This manifest inventories the repository-internal governance files for the Agent Work Governance distribution repository. Distributable packages are located in templates/software/.agents/ and templates/scientific/.agents/."
   },
-  "canonical_artifacts": [
-    {
-      "path": ".agents/software-workflow.md",
-      "document_id": "SD-PROTOCOL-001",
-      "version": "2.3",
-      "status": "approved-reference",
-      "role": "normative-delivery-protocol"
+  "distribution_packages": {
+    "software": {
+      "path": "templates/software/.agents",
+      "manifest": "templates/software/.agents/manifest.json"
     },
-    {
-      "path": ".agents/AGENTS.md",
-      "document_id": "AGENTS-CONTRACT-001",
-      "version": "1.3",
-      "status": "approved-reference",
-      "role": "repository-ai-delivery-contract"
-    },
-    {
-      "path": ".agents/context/project.md",
-      "document_id": "AGENT-CONTEXT-001",
-      "version": "1.1",
-      "status": "approved-template",
-      "role": "repository-context-entrypoint"
-    },
-    {
-      "path": ".agents/prompts/plan-create-task.md",
-      "document_id": "AGENT-PROMPT-PLAN-001",
-      "version": "2.4",
-      "status": "approved-template",
-      "role": "planner-reviewer-orchestration"
-    },
-    {
-      "path": ".agents/tasks/_template.md",
-      "document_id": "AGENT-TASK-001",
-      "version": "1.2",
-      "status": "approved-template",
-      "role": "validated-task-template"
+    "scientific": {
+      "path": "templates/scientific/.agents",
+      "manifest": "templates/scientific/.agents/manifest.json"
     }
+  },
+  "shared_invariants": [
+    "authority-vs-evidence",
+    "external-imperative-not-authority",
+    "planner-reviewer-executor",
+    "bounded-contract",
+    "governing-revision",
+    "implementation-or-execution-baseline",
+    "remediation-vs-replanning",
+    "evidence-before-acceptance",
+    "acceptance-not-consequential-authorization",
+    "progressive-context-runtime-neutrality"
   ],
-  "runtime_adapters": {
-    "codex": {
-      "version": "1.2",
-      "status": "approved-template",
-      "source_files": [
-        ".agents/runtime-adapters/codex/README.md",
-        ".agents/runtime-adapters/codex/AGENTS.md"
-      ],
-      "bootstrap": {
-        "source": ".agents/runtime-adapters/codex/AGENTS.md",
-        "materialization_target": "AGENTS.md"
-      }
-    },
-    "claude": {
-      "version": "1.2",
-      "status": "approved-template",
-      "source_files": [
-        ".agents/runtime-adapters/claude/README.md",
-        ".agents/runtime-adapters/claude/CLAUDE.md"
-      ],
-      "bootstrap": {
-        "source": ".agents/runtime-adapters/claude/CLAUDE.md",
-        "materialization_target": "CLAUDE.md",
-        "materialization_rewrite": {
-          "from": "@../../AGENTS.md",
-          "to": "@.agents/AGENTS.md"
-        }
-      }
-    },
-    "antigravity": {
-      "version": "1.2",
-      "status": "approved-template",
-      "source_files": [
-        ".agents/runtime-adapters/antigravity/README.md",
-        ".agents/runtime-adapters/antigravity/rules/antigravity-code-agent-workflow.md"
-      ],
-      "bootstrap": {
-        "source": ".agents/runtime-adapters/antigravity/rules/antigravity-code-agent-workflow.md",
-        "materialization_target": ".agents/rules/code-agent-workflow.md",
-        "activation": "Always On"
-      }
-    }
+  "external_references": {
+    "software_methodology": "https://github.com/obra/superpowers",
+    "scientific_methodology": "https://github.com/K-Dense-AI/science-superpowers",
+    "scientific_capabilities": "https://github.com/K-Dense-AI/scientific-agent-skills",
+    "github_rename_guidance": "https://docs.github.com/en/repositories/creating-and-managing-repositories/renaming-a-repository"
   }
 }
