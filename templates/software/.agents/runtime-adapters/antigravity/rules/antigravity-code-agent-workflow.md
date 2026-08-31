@@ -251,12 +251,12 @@ For every material repository action:
 
 ```text
 Antigravity Always-On workspace rule
-ÔåÆ .agents/AGENTS.md
-ÔåÆ role-specific canonical loading
-ÔåÆ applicable Antigravity skills/plugins/agents/workflows
-ÔåÆ bounded work
-ÔåÆ observed evidence
-ÔåÆ canonical Planner/Reviewer loop
+→ .agents/AGENTS.md
+→ role-specific canonical loading
+→ applicable Antigravity skills/plugins/agents/workflows
+→ bounded work
+→ observed evidence
+→ canonical Planner/Reviewer loop
 ```
 
 When Antigravity runtime methodology and repository delivery governance differ, preserve repository authority and surface the conflict.

@@ -181,9 +181,9 @@ Apply the same boundary:
 
 ```text
 installed capability
-        Ôåô
+        ↓
 technical methodology / evidence aid
-        Ôåô
+        ↓
 canonical repository authority and task remain controlling
 ```
 
@@ -285,12 +285,12 @@ For every material repository action:
 
 ```text
 Codex root AGENTS.md
-ÔåÆ .agents/AGENTS.md
-ÔåÆ role-specific canonical loading
-ÔåÆ applicable runtime skills/plugins
-ÔåÆ bounded work
-ÔåÆ observed evidence
-ÔåÆ canonical Planner/Reviewer loop
+→ .agents/AGENTS.md
+→ role-specific canonical loading
+→ applicable runtime skills/plugins
+→ bounded work
+→ observed evidence
+→ canonical Planner/Reviewer loop
 ```
 
 When runtime methodology and repository delivery governance differ, preserve repository authority and surface the conflict.

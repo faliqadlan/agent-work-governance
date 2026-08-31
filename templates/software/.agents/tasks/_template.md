@@ -115,8 +115,8 @@ Examples MAY include:
 
 ### Requirement traceability
 
-- `<requirement-id>` ÔåÆ `<authority reference>`
-- `<requirement-id>` ÔåÆ `<authority reference>`
+- `<requirement-id>` → `<authority reference>`
+- `<requirement-id>` → `<authority reference>`
 
 Do not use existing implementation as retroactive justification for missing authority.
 

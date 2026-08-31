@@ -26,11 +26,11 @@ The canonical delivery framework remains under:
 
 ```text
 .agents/
-Ôö£ÔöÇÔöÇ AGENTS.md
-Ôö£ÔöÇÔöÇ software-workflow.md
-Ôö£ÔöÇÔöÇ context/
-Ôö£ÔöÇÔöÇ prompts/
-ÔööÔöÇÔöÇ tasks/
+├── AGENTS.md
+├── software-workflow.md
+├── context/
+├── prompts/
+└── tasks/
 ```
 
 The Antigravity adapter does not redefine that framework.
@@ -39,9 +39,9 @@ The Antigravity adapter does not redefine that framework.
 
 ```text
 runtime-adapters/antigravity/
-Ôö£ÔöÇÔöÇ README.md
-ÔööÔöÇÔöÇ rules/
-    ÔööÔöÇÔöÇ antigravity-code-agent-workflow.md
+├── README.md
+└── rules/
+    └── antigravity-code-agent-workflow.md
 ```
 
 ### `rules/antigravity-code-agent-workflow.md`
@@ -92,22 +92,22 @@ Typical resulting repository:
 
 ```text
 target-repository/
-ÔööÔöÇÔöÇ .agents/
-    Ôö£ÔöÇÔöÇ AGENTS.md
-    Ôö£ÔöÇÔöÇ software-workflow.md
-    Ôö£ÔöÇÔöÇ context/
-    Ôöé   ÔööÔöÇÔöÇ project.md
-    Ôö£ÔöÇÔöÇ prompts/
-    Ôöé   ÔööÔöÇÔöÇ plan-create-task.md
-    Ôö£ÔöÇÔöÇ tasks/
-    Ôöé   ÔööÔöÇÔöÇ _template.md
-    Ôö£ÔöÇÔöÇ runtime-adapters/
-    Ôöé   ÔööÔöÇÔöÇ antigravity/
-    Ôöé       Ôö£ÔöÇÔöÇ README.md
-    Ôöé       ÔööÔöÇÔöÇ rules/
-    Ôöé           ÔööÔöÇÔöÇ antigravity-code-agent-workflow.md
-    ÔööÔöÇÔöÇ rules/
-        ÔööÔöÇÔöÇ code-agent-workflow.md
+└── .agents/
+    ├── AGENTS.md
+    ├── software-workflow.md
+    ├── context/
+    │   └── project.md
+    ├── prompts/
+    │   └── plan-create-task.md
+    ├── tasks/
+    │   └── _template.md
+    ├── runtime-adapters/
+    │   └── antigravity/
+    │       ├── README.md
+    │       └── rules/
+    │           └── antigravity-code-agent-workflow.md
+    └── rules/
+        └── code-agent-workflow.md
 ```
 
 The copy under `.agents/runtime-adapters/antigravity/` is the adapter source/reference.
@@ -225,14 +225,14 @@ At minimum:
 
 ```text
 .agents/
-Ôö£ÔöÇÔöÇ AGENTS.md
-Ôö£ÔöÇÔöÇ software-workflow.md
-Ôö£ÔöÇÔöÇ context/
-Ôöé   ÔööÔöÇÔöÇ project.md
-Ôö£ÔöÇÔöÇ prompts/
-Ôöé   ÔööÔöÇÔöÇ plan-create-task.md
-ÔööÔöÇÔöÇ tasks/
-    ÔööÔöÇÔöÇ _template.md
+├── AGENTS.md
+├── software-workflow.md
+├── context/
+│   └── project.md
+├── prompts/
+│   └── plan-create-task.md
+└── tasks/
+    └── _template.md
 ```
 
 Repository-specific authority, tasks, scoped context, and planning artifacts MAY extend this structure.
@@ -288,7 +288,7 @@ Hooks and Project-level permission conflicts are assessed separately because the
 
 ## 4. Materialize the Workspace Rule
 
-### Case A ÔÇö no existing target rule
+### Case A — no existing target rule
 
 Copy:
 
@@ -304,7 +304,7 @@ to:
 
 Then configure the materialized rule as **Always On**.
 
-### Case B ÔÇö the existing target rule is already this adapter
+### Case B — the existing target rule is already this adapter
 
 Compare it with the adapter source under:
 
@@ -318,7 +318,7 @@ Verify that it remains configured as **Always On**.
 
 If it has intentional repository-specific additions, treat it as Case C.
 
-### Case C ÔÇö the target filename already contains other content
+### Case C — the target filename already contains other content
 
 Do NOT overwrite it blindly.
 
@@ -332,7 +332,7 @@ Avoid merging unrelated technical instructions into the bootstrap merely to redu
 
 Antigravity can load multiple Workspace Rules, so separate rules are normally preferable when their responsibilities are distinct.
 
-### Case D ÔÇö another Workspace Rule conflicts
+### Case D — another Workspace Rule conflicts
 
 Do not rely on the adapter to neutralize a contradictory active rule.
 
@@ -353,7 +353,7 @@ A Workspace Rule is incompatible when it materially attempts to:
 
 Scoped technical rules MAY remain active when they are compatible with those boundaries.
 
-### Case E ÔÇö a Global Rule conflicts or creates authority ambiguity
+### Case E — a Global Rule conflicts or creates authority ambiguity
 
 Global Rules are user/runtime-level instructions and are not stored in the repository.
 
@@ -506,10 +506,10 @@ They are distinct from Rules:
 
 ```text
 Rules
-ÔåÆ persistent reusable prompt context
+→ persistent reusable prompt context
 
 Workflows
-ÔåÆ slash-invoked trajectory / step sequence
+→ slash-invoked trajectory / step sequence
 ```
 
 A repository MAY use Workflows for runtime convenience.
@@ -547,10 +547,10 @@ Use them within:
 
 ```text
 direct applicable human / repository authority
-ÔåÆ .agents/software-workflow.md
-ÔåÆ .agents/AGENTS.md
-ÔåÆ exact governing validated task when executing
-ÔåÆ approval and side-effect boundaries
+→ .agents/software-workflow.md
+→ .agents/AGENTS.md
+→ exact governing validated task when executing
+→ approval and side-effect boundaries
 ```
 
 Workspace-specific plugins may be installed under Antigravity's supported workspace plugin locations.
@@ -589,10 +589,10 @@ After installation:
 
 ```text
 Superpowers
-ÔåÆ engineering methodology
+→ engineering methodology
 
 .agents/
-ÔåÆ repository delivery governance
+→ repository delivery governance
 ```
 
 Superpowers-generated technical plans, design documents, specifications, or other methodology artifacts do not automatically become approved repository authority.

@@ -19,7 +19,7 @@ authority_note: Approved repository authority governs intended behavior. Observe
 
 > **Canonical delivery lifecycle**
 >
-> Business Sources ÔåÆ PRD ÔåÆ Requirement Registry & Matrices ÔåÆ Architecture & Repository Context ÔåÆ Delivery Planning ÔåÆ Validated Task ÔåÆ Execution & Verification ÔåÆ Implementation Review ÔåÆ Remediation or Acceptance ÔåÆ New Accepted Baseline ÔåÆ Separate Release Gate
+> Business Sources → PRD → Requirement Registry & Matrices → Architecture & Repository Context → Delivery Planning → Validated Task → Execution & Verification → Implementation Review → Remediation or Acceptance → New Accepted Baseline → Separate Release Gate
 
 ## 1. Purpose
 
@@ -176,15 +176,15 @@ Delivery MUST remain traceable through the concerns that are materially applicab
 
 ```text
 business intent
-ÔåÆ product behavior
-ÔåÆ atomic requirements
-ÔåÆ architecture and ownership
-ÔåÆ bounded delivery objective
-ÔåÆ validated task
-ÔåÆ implementation
-ÔåÆ verification evidence
-ÔåÆ review verdict
-ÔåÆ accepted baseline
+→ product behavior
+→ atomic requirements
+→ architecture and ownership
+→ bounded delivery objective
+→ validated task
+→ implementation
+→ verification evidence
+→ review verdict
+→ accepted baseline
 ```
 
 ## 5.2 Strict semantics, proportional artifacts
@@ -244,10 +244,10 @@ Success MUST NOT be claimed solely from:
 
 ```text
 accepted implementation
-Ôëá Work Package complete
-Ôëá production ready
-Ôëá deployed
-Ôëá released
+≠ Work Package complete
+≠ production ready
+≠ deployed
+≠ released
 ```
 
 Release authorization remains a separate gate.
@@ -279,11 +279,11 @@ A greenfield repository will commonly begin near the start of the lifecycle:
 
 ```text
 Business Sources
-ÔåÆ PRD
-ÔåÆ Requirements
-ÔåÆ Architecture
-ÔåÆ Delivery Planning
-ÔåÆ Task
+→ PRD
+→ Requirements
+→ Architecture
+→ Delivery Planning
+→ Task
 ```
 
 ### In-progress repository
@@ -292,10 +292,10 @@ An in-progress repository SHOULD first reconcile what already exists:
 
 ```text
 inspect repository
-ÔåÆ map existing artifacts
-ÔåÆ identify valid, stale, partial, or missing concerns
-ÔåÆ repair only what is necessary
-ÔåÆ continue from earliest unreliable gate
+→ map existing artifacts
+→ identify valid, stale, partial, or missing concerns
+→ repair only what is necessary
+→ continue from earliest unreliable gate
 ```
 
 ### Mature repository
@@ -304,10 +304,10 @@ A mature repository MAY begin from a new source, change request, incident, or ac
 
 ```text
 new source or change
-ÔåÆ impact analysis
-ÔåÆ affected requirements and architecture
-ÔåÆ delivery planning
-ÔåÆ next task
+→ impact analysis
+→ affected requirements and architecture
+→ delivery planning
+→ next task
 ```
 
 ### Legacy repository
@@ -338,7 +338,7 @@ Inference MUST NOT be silently promoted to approved authority.
 | PRD / product specification | What behavior should users or systems experience? | Actors, journeys, functional behavior, NFRs, rules, edge cases, scope, acceptance. |
 | Requirement registry | What are the atomic obligations? | Stable ID, statement, type, source, owner, priority, dependency, status, verification method. |
 | Source coverage mapping | Are approved sources represented? | Source-to-requirement coverage, exclusions, uncovered source detection. |
-| Traceability mapping | Can delivery be traced end to end? | Source Ôåö PRD Ôåö requirement Ôåö architecture Ôåö delivery objective Ôåö task Ôåö implementation Ôåö evidence Ôåö baseline. |
+| Traceability mapping | Can delivery be traced end to end? | Source ↔ PRD ↔ requirement ↔ architecture ↔ delivery objective ↔ task ↔ implementation ↔ evidence ↔ baseline. |
 | Dependency mapping | What must exist or be decided first? | Internal/external dependency, data contract, migration, infrastructure, policy, approval. |
 | Decision record / ADR | Why was a material design choice made? | Options, trade-offs, decision, owner, consequences, revisit trigger. |
 | Architecture / repository context | Where and under what authority does behavior live? | Module boundaries, source of truth, trust boundaries, stack, conventions, repository policy. |
@@ -387,13 +387,13 @@ Traceability is mandatory, but downstream links MAY legitimately be absent befor
 For example, an approved requirement that has not yet been implemented may have:
 
 ```text
-Source       Ô£ô
-PRD          Ô£ô
-Owner        Ô£ô
-Task         ÔÇö
-Code         ÔÇö
-Test         ÔÇö
-Accepted     ÔÇö
+Source       ✓
+PRD          ✓
+Owner        ✓
+Task         —
+Code         —
+Test         —
+Accepted     —
 ```
 
 Once a requirement is claimed as implemented, verified, or accepted, the corresponding downstream evidence MUST exist.
@@ -404,14 +404,14 @@ Important requirements SHOULD be traceable through:
 
 ```text
 Business Source
-ÔåÆ PRD section or product decision
-ÔåÆ Requirement ID
-ÔåÆ Owning architecture/module
-ÔåÆ Work Package and/or MVP objective
-ÔåÆ Executable task
-ÔåÆ Implementation revision
-ÔåÆ Verification evidence
-ÔåÆ Accepted baseline
+→ PRD section or product decision
+→ Requirement ID
+→ Owning architecture/module
+→ Work Package and/or MVP objective
+→ Executable task
+→ Implementation revision
+→ Verification evidence
+→ Accepted baseline
 ```
 
 ## 8.3 Bidirectional traceability
@@ -491,7 +491,7 @@ Non-blocking items MAY remain open when they are explicitly recorded with:
 
 ---
 
-# 10. Phase 01 ÔÇö Business Sources and Framing
+# 10. Phase 01 — Business Sources and Framing
 
 ## Objective
 
@@ -533,7 +533,7 @@ B0 passes when the next product-definition work can proceed without inventing ma
 
 ---
 
-# 11. Phase 02 ÔÇö Product Requirements Document
+# 11. Phase 02 — Product Requirements Document
 
 ## Objective
 
@@ -576,7 +576,7 @@ P1 passes when product behavior is sufficiently explicit to decompose into atomi
 
 ---
 
-# 12. Phase 03 ÔÇö Requirement Registry and Matrices
+# 12. Phase 03 — Requirement Registry and Matrices
 
 ## Objective
 
@@ -651,7 +651,7 @@ R2 passes when approved requirements can be traced to legitimate authority, assi
 
 ---
 
-# 13. Phase 04 ÔÇö Architecture and Repository Context
+# 13. Phase 04 — Architecture and Repository Context
 
 ## Objective
 
@@ -736,7 +736,7 @@ A3 passes when delivery planning can proceed without inventing material architec
 
 ---
 
-# 14. Phase 05 ÔÇö Delivery Planning
+# 14. Phase 05 — Delivery Planning
 
 ## Objective
 
@@ -834,7 +834,7 @@ D4 passes when the selected delivery objective is sufficiently bounded, dependen
 
 ---
 
-# 15. Phase 06 ÔÇö Validated Executable Task
+# 15. Phase 06 — Validated Executable Task
 
 ## Objective
 
@@ -917,23 +917,23 @@ A repository MAY represent task state using states such as:
 
 ```text
 Draft
-ÔåÆ Validated / Published
-ÔåÆ In Execution
-ÔåÆ Review Required
-ÔåÆ Accepted
+→ Validated / Published
+→ In Execution
+→ Review Required
+→ Accepted
 ```
 
 or:
 
 ```text
 Draft
-ÔåÆ Validated / Published
-ÔåÆ In Execution
-ÔåÆ Review Required
-ÔåÆ Remediation Required
-ÔåÆ In Execution
-ÔåÆ Review Required
-ÔåÆ Accepted
+→ Validated / Published
+→ In Execution
+→ Review Required
+→ Remediation Required
+→ In Execution
+→ Review Required
+→ Accepted
 ```
 
 Task lifecycle state and governing task revision are related but distinct concerns.
@@ -973,7 +973,7 @@ T5 passes when the task satisfies the repository's applicable task contract, has
 
 ---
 
-# 16. Phase 07 ÔÇö Execution and Verification
+# 16. Phase 07 — Execution and Verification
 
 ## Objective
 
@@ -1092,7 +1092,7 @@ If the Executor reaches a valid stop condition and no reviewable implementation 
 
 ---
 
-# 17. Phase 08 ÔÇö Implementation Review
+# 17. Phase 08 — Implementation Review
 
 ## Objective
 
@@ -1168,7 +1168,7 @@ V7 passes when the implementation has been reviewed against the correct boundari
 
 ---
 
-# 18. Phase 09 ÔÇö Remediation and Evidence Closure
+# 18. Phase 09 — Remediation and Evidence Closure
 
 ## Objective
 
@@ -1229,7 +1229,7 @@ R8 passes when the bounded findings that prevented acceptance are closed and imp
 
 ---
 
-# 19. Phase 10 ÔÇö Acceptance and New Baseline
+# 19. Phase 10 — Acceptance and New Baseline
 
 ## Objective
 
@@ -1284,7 +1284,7 @@ A9 passes when the reviewed implementation revision is explicitly established as
 
 ---
 
-# 20. Phase 11 ÔÇö Separate Release Gate
+# 20. Phase 11 — Separate Release Gate
 
 ## Objective
 
@@ -1296,13 +1296,13 @@ Implementation acceptance and release approval are separate tracks.
 
 ```text
 implementation review
-ÔåÆ accepted baseline
-ÔåÆ development may continue
+→ accepted baseline
+→ development may continue
 
 accepted baseline
-ÔåÆ release checks
-ÔåÆ release authority decision
-ÔåÆ deployment / publication / release
+→ release checks
+→ release authority decision
+→ deployment / publication / release
 ```
 
 Acceptance MUST NOT be interpreted as authorization to deploy, publish, or release.
@@ -1482,11 +1482,11 @@ For a new repository, a team MAY choose a structure such as:
 
 ```text
 docs/
-Ôö£ÔöÇÔöÇ business/
-Ôö£ÔöÇÔöÇ product/
-Ôö£ÔöÇÔöÇ requirements/
-Ôö£ÔöÇÔöÇ architecture/
-ÔööÔöÇÔöÇ delivery/
+├── business/
+├── product/
+├── requirements/
+├── architecture/
+└── delivery/
 ```
 
 This is an example, not a protocol requirement.
@@ -1497,13 +1497,13 @@ When this protocol is distributed as a runtime-neutral `.agents/` package, a min
 
 ```text
 .agents/
-Ôö£ÔöÇÔöÇ AGENTS.md
-Ôö£ÔöÇÔöÇ software-workflow.md
-Ôö£ÔöÇÔöÇ context/
-Ôöé   ÔööÔöÇÔöÇ project.md
-Ôö£ÔöÇÔöÇ prompts/
-Ôö£ÔöÇÔöÇ tasks/
-ÔööÔöÇÔöÇ runtime-adapters/
+├── AGENTS.md
+├── software-workflow.md
+├── context/
+│   └── project.md
+├── prompts/
+├── tasks/
+└── runtime-adapters/
 ```
 
 Responsibilities are:
@@ -1540,7 +1540,7 @@ Those methodologies remain subordinate to repository authority and the bounded t
 
 | Anti-pattern | Why it violates the protocol |
 |---|---|
-| Business intent ÔåÆ coding directly | Product behavior, requirements, authority, and acceptance become ambiguous. |
+| Business intent → coding directly | Product behavior, requirements, authority, and acceptance become ambiguous. |
 | Rebuilding all artifacts in an existing repository | Discards valid repository authority and creates unnecessary documentation churn. |
 | Treating implementation as the requirement source | Existing code becomes retroactive authority without approval. |
 | Treating approved requirements as proof of implementation | Intended state is confused with observed reality. |
@@ -1637,40 +1637,40 @@ The protocol can be summarized as:
 
 ```text
 Discover repository authority and current state
-ÔåÆ reuse valid existing artifacts
-ÔåÆ repair only missing or unreliable gates
-ÔåÆ establish approved product and requirement authority
-ÔåÆ establish architecture and ownership
-ÔåÆ choose current delivery objective
-ÔåÆ publish a validated bounded task
-ÔåÆ execute against exact baseline and task revision
-ÔåÆ verify using observed evidence
-ÔåÆ review implementation against authority and evidence
-ÔåÆ remediate within the same objective when necessary
-ÔåÆ accept an immutable new baseline
-ÔåÆ continue planning independently of release
-ÔåÆ release only through the separate applicable Release Gate
+→ reuse valid existing artifacts
+→ repair only missing or unreliable gates
+→ establish approved product and requirement authority
+→ establish architecture and ownership
+→ choose current delivery objective
+→ publish a validated bounded task
+→ execute against exact baseline and task revision
+→ verify using observed evidence
+→ review implementation against authority and evidence
+→ remediate within the same objective when necessary
+→ accept an immutable new baseline
+→ continue planning independently of release
+→ release only through the separate applicable Release Gate
 ```
 
 Or, in lifecycle form:
 
 ```text
 Business Sources
-ÔåÆ PRD
-ÔåÆ Requirement Registry & Matrices
-ÔåÆ Architecture & Repository Context
-ÔåÆ Delivery Planning
-ÔåÆ Validated Task
-ÔåÆ Execution & Verification
-ÔåÆ Implementation Review
-ÔåÆ Remediation or Acceptance
-ÔåÆ New Accepted Baseline
-ÔåÆ Separate Release Gate
+→ PRD
+→ Requirement Registry & Matrices
+→ Architecture & Repository Context
+→ Delivery Planning
+→ Validated Task
+→ Execution & Verification
+→ Implementation Review
+→ Remediation or Acceptance
+→ New Accepted Baseline
+→ Separate Release Gate
 ```
 
 ---
 
-# Appendix A ÔÇö Glossary
+# Appendix A — Glossary
 
 | Term | Definition |
 |---|---|
@@ -1699,7 +1699,7 @@ Business Sources
 
 ---
 
-# Appendix B ÔÇö Protocol maintenance
+# Appendix B — Protocol maintenance
 
 | Field | Rule |
 |---|---|

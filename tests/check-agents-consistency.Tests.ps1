@@ -1,19 +1,19 @@
 $ErrorActionPreference = 'Stop'
 $root = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
-$checker = Join-Path $root '.agents/check-consistency.ps1'
+$softwareAgents = Join-Path $root 'templates/software/.agents'
 
-if (-not (Test-Path -LiteralPath $checker)) { throw 'Expected consistency checker was not found.' }
+if (-not (Test-Path -LiteralPath $softwareAgents)) { throw 'Expected Software package was not found.' }
 
 function New-Fixture {
     $fixture = Join-Path ([System.IO.Path]::GetTempPath()) ('agents-check-' + [guid]::NewGuid())
     New-Item -ItemType Directory -Path $fixture | Out-Null
-    Copy-Item -Recurse -LiteralPath (Join-Path $root '.agents') -Destination $fixture
-    Copy-Item -LiteralPath (Join-Path $root 'README.md') -Destination $fixture
+    Copy-Item -Recurse -LiteralPath $softwareAgents -Destination (Join-Path $fixture '.agents')
     return $fixture
 }
 
 function Invoke-FixtureChecker([string]$Fixture) {
-    $output = @(& $checker -Root $Fixture 2>&1)
+    $checker = Join-Path $Fixture '.agents/check-consistency.ps1'
+    $output = @(& $checker -Root (Join-Path $Fixture '.agents') 2>&1)
     return [pscustomobject]@{ ExitCode = $LASTEXITCODE; Output = ($output -join "`n") }
 }
 
@@ -24,19 +24,11 @@ function Assert-CheckerFails([string]$Fixture, [string]$ExpectedMessage) {
     }
 }
 
-& $checker -Root $root
-if ($LASTEXITCODE -ne 0) { throw 'The current repository should pass the consistency check.' }
+# 1. Base check should pass
+$baseResult = Invoke-FixtureChecker (Join-Path $root 'templates/software')
+if ($baseResult.ExitCode -ne 0) { throw "Software package should pass consistency check. Output=$($baseResult.Output)" }
 
-$fixture = New-Fixture
-try {
-    $manifestPath = Join-Path $fixture '.agents/manifest.json'
-    $manifest = Get-Content -Raw -LiteralPath $manifestPath | ConvertFrom-Json
-    $manifest.architecture.core.path = '.agents/core-governance.md'
-    Remove-Item -LiteralPath (Join-Path $fixture '.agents/core-governance.md')
-    $manifest | ConvertTo-Json -Depth 10 | Set-Content -LiteralPath $manifestPath
-    Assert-CheckerFails $fixture "Manifest architecture core path '.agents/core-governance.md' does not exist."
-} finally { if (Test-Path -LiteralPath $fixture) { Remove-Item -Recurse -Force -LiteralPath $fixture } }
-
+# 2. Canonical artifact reordering should pass
 $fixture = New-Fixture
 try {
     $manifestPath = Join-Path $fixture '.agents/manifest.json'
@@ -47,6 +39,7 @@ try {
     if ($result.ExitCode -ne 0) { throw "Harmless canonical artifact reordering should pass. Output=$($result.Output)" }
 } finally { if (Test-Path -LiteralPath $fixture) { Remove-Item -Recurse -Force -LiteralPath $fixture } }
 
+# 3. Antigravity tree entry with materialized filename should fail
 $fixture = New-Fixture
 try {
     $antigravityReadmePath = Join-Path $fixture '.agents/runtime-adapters/antigravity/README.md'
@@ -63,6 +56,7 @@ try {
     if ($result.ExitCode -ne 0) { throw "Restored valid Antigravity tree should pass. Output=$($result.Output)" }
 } finally { if (Test-Path -LiteralPath $fixture) { Remove-Item -Recurse -Force -LiteralPath $fixture } }
 
+# 4. Antigravity rule path pointing to code-agent-workflow.md should fail
 $fixture = New-Fixture
 try {
     $antigravityReadmePath = Join-Path $fixture '.agents/runtime-adapters/antigravity/README.md'
@@ -72,6 +66,7 @@ try {
     Assert-CheckerFails $fixture "Antigravity retained source depiction uses materialized filename 'code-agent-workflow.md'"
 } finally { if (Test-Path -LiteralPath $fixture) { Remove-Item -Recurse -Force -LiteralPath $fixture } }
 
+# 5. Missing runtime source file in manifest should fail
 $fixture = New-Fixture
 try {
     $manifestPath = Join-Path $fixture '.agents/manifest.json'
@@ -81,6 +76,7 @@ try {
     Assert-CheckerFails $fixture "Manifest runtime source path '.agents/runtime-adapters/antigravity/rules/missing.md' does not exist."
 } finally { if (Test-Path -LiteralPath $fixture) { Remove-Item -Recurse -Force -LiteralPath $fixture } }
 
+# 6. Missing canonical artifact in manifest should fail
 $fixture = New-Fixture
 try {
     $manifestPath = Join-Path $fixture '.agents/manifest.json'
@@ -90,6 +86,7 @@ try {
     Assert-CheckerFails $fixture "Manifest is missing expected canonical artifact '.agents/AGENTS.md'."
 } finally { if (Test-Path -LiteralPath $fixture) { Remove-Item -Recurse -Force -LiteralPath $fixture } }
 
+# 7. Duplicate canonical artifact in manifest should fail
 $fixture = New-Fixture
 try {
     $manifestPath = Join-Path $fixture '.agents/manifest.json'
@@ -100,6 +97,7 @@ try {
     Assert-CheckerFails $fixture "Manifest contains duplicate canonical artifact identity '.agents/AGENTS.md'."
 } finally { if (Test-Path -LiteralPath $fixture) { Remove-Item -Recurse -Force -LiteralPath $fixture } }
 
+# 8. Conflating bootstrap source and materialization target should fail
 $fixture = New-Fixture
 try {
     $manifestPath = Join-Path $fixture '.agents/manifest.json'
@@ -110,30 +108,5 @@ try {
     Assert-CheckerFails $fixture "Runtime adapter 'antigravity' conflates retained source '.agents/rules/code-agent-workflow.md' with materialization target '.agents/rules/code-agent-workflow.md'."
 } finally { if (Test-Path -LiteralPath $fixture) { Remove-Item -Recurse -Force -LiteralPath $fixture } }
 
-function Get-ExactReadmeVersion([string]$ReadmeText, [string]$ArtifactPath) {
-    $pattern = '(?m)^\|\s*`' + [regex]::Escape($ArtifactPath) + '`\s*\|\s*([^|]+)\s*\|$'
-    $matches = [regex]::Matches($ReadmeText, $pattern)
-    if ($matches.Count -ne 1) {
-        throw "Expected exactly one README version match for '$ArtifactPath', found $($matches.Count)."
-    }
-    return [pscustomobject]@{
-        FullMatch = $matches[0].Value
-        Version = $matches[0].Groups[1].Value.Trim()
-    }
-}
-
-$fixture = New-Fixture
-try {
-    $readmePath = Join-Path $fixture 'README.md'
-    $readme = Get-Content -Raw -LiteralPath $readmePath
-    $entry = Get-ExactReadmeVersion $readme 'prompts/plan-create-task.md'
-    $invalidRow = $entry.FullMatch.Replace($entry.Version, "$($entry.Version)-invalid")
-    $replacedCount = 0
-    $newReadme = [regex]::Replace($readme, [regex]::Escape($entry.FullMatch), [System.Text.RegularExpressions.MatchEvaluator]{ param($m) $script:replacedCount++; return $invalidRow }, 1)
-    if ($replacedCount -ne 1) { throw "Expected replacement count 1, got $replacedCount" }
-    Set-Content -LiteralPath $readmePath -Value $newReadme
-    Assert-CheckerFails $fixture "README version for 'prompts/plan-create-task.md'"
-} finally { if (Test-Path -LiteralPath $fixture) { Remove-Item -Recurse -Force -LiteralPath $fixture } }
-
-Write-Output 'Consistency checker regression tests passed.'
+Write-Output 'Software package consistency checker regression tests passed.'
 exit 0

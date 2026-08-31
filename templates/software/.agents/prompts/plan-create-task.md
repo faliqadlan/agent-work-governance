@@ -48,13 +48,13 @@ Typical loop:
 
 ```text
 plan-create-task.md
-ÔåÆ validated task
-ÔåÆ Executor Launcher
-ÔåÆ Executor
-ÔåÆ implementation + evidence
-ÔåÆ plan-create-task.md
-ÔåÆ accept / remediate / return to planning
-ÔåÆ next valid action
+→ validated task
+→ Executor Launcher
+→ Executor
+→ implementation + evidence
+→ plan-create-task.md
+→ accept / remediate / return to planning
+→ next valid action
 ```
 
 ## Required loading
@@ -144,7 +144,7 @@ If a graph, index, summary, cached repository model, context file, or generated 
 
 ---
 
-# Phase 1 ÔÇö Establish current delivery state
+# Phase 1 — Establish current delivery state
 
 Determine the repository state against which planning and review are being performed.
 
@@ -206,7 +206,7 @@ Independent parallel work MAY continue when dependencies, baselines, and overlap
 
 ---
 
-# Phase 2 ÔÇö Resolve pending Executor results and review implementation
+# Phase 2 — Resolve pending Executor results and review implementation
 
 Run this phase whenever an Executor has returned a result for a governing task.
 
@@ -240,7 +240,7 @@ When the Executor stopped because a task stop condition or materially invalid pr
 
 A valid Executor stop result can close the execution attempt without producing an accepted implementation.
 
-## E6 ÔÇö Execution Verification
+## E6 — Execution Verification
 
 Determine what was actually executed and verified.
 
@@ -275,7 +275,7 @@ as sufficient evidence by themselves.
 
 Record verification gaps explicitly.
 
-## V7 ÔÇö Implementation Review
+## V7 — Implementation Review
 
 Evaluate the implementation against the governing delivery contract.
 
@@ -312,12 +312,12 @@ Confirm progressive downstream traceability for any implementation claimed as sa
 
 ```text
 Business / Product authority
-ÔåÆ Requirement
-ÔåÆ Delivery objective
-ÔåÆ Governing task
-ÔåÆ Implementation
-ÔåÆ Verification
-ÔåÆ Review verdict
+→ Requirement
+→ Delivery objective
+→ Governing task
+→ Implementation
+→ Verification
+→ Review verdict
 ```
 
 Use reverse traceability to identify:
@@ -403,7 +403,7 @@ The remediation update MUST:
 
 After publication, stop and hand the task back to the Executor unless repository policy permits additional non-implementation planning in parallel.
 
-On the next review attempt, record **R8 ÔÇö Remediation Closure** as passed only when the bounded findings are actually closed and implementation, evidence, tests, and applicable documentation are mutually consistent. If no remediation was required for the delivery objective, R8 MAY be recorded as not applicable.
+On the next review attempt, record **R8 — Remediation Closure** as passed only when the bounded findings are actually closed and implementation, evidence, tests, and applicable documentation are mutually consistent. If no remediation was required for the delivery objective, R8 MAY be recorded as not applicable.
 
 ### PLANNING REQUIRED
 
@@ -440,7 +440,7 @@ Record the exact missing evidence and condition required to resume review.
 
 ---
 
-# Phase 3 ÔÇö Establish the accepted baseline
+# Phase 3 — Establish the accepted baseline
 
 After an ACCEPTED verdict, establish or confirm the new accepted baseline.
 
@@ -466,19 +466,19 @@ Do not duplicate authoritative acceptance evidence merely to keep context synchr
 
 ---
 
-# Phase 4 ÔÇö Determine the earliest unmet or unreliable planning gate
+# Phase 4 — Determine the earliest unmet or unreliable planning gate
 
 After pending review is resolved, or when no review is pending, assess the current planning state.
 
 Assess in order:
 
 ```text
-B0 ÔÇö Business Framing
-P1 ÔÇö Product Definition
-R2 ÔÇö Requirements Traceability
-A3 ÔÇö Architecture Clarity
-D4 ÔÇö Delivery Readiness
-T5 ÔÇö Task Readiness
+B0 — Business Framing
+P1 — Product Definition
+R2 — Requirements Traceability
+A3 — Architecture Clarity
+D4 — Delivery Readiness
+T5 — Task Readiness
 ```
 
 Do not require a gate to be rebuilt merely because evidence is stored differently from the generic template.
@@ -491,7 +491,7 @@ Do not proceed merely because downstream files exist.
 
 ---
 
-# Phase 5 ÔÇö B0 Business Framing
+# Phase 5 — B0 Business Framing
 
 Determine whether current work is grounded in approved business intent or equivalent designated authority.
 
@@ -524,7 +524,7 @@ Do not infer business authority from existing code.
 
 ---
 
-# Phase 6 ÔÇö P1 Product Definition
+# Phase 6 — P1 Product Definition
 
 Determine whether expected product or system behavior is sufficiently defined for the current objective.
 
@@ -561,7 +561,7 @@ Do not use observed code behavior as a substitute for missing product authority.
 
 ---
 
-# Phase 7 ÔÇö R2 Requirements
+# Phase 7 — R2 Requirements
 
 Determine whether requirements are sufficiently atomic, traceable, owned, and testable for the current objective.
 
@@ -623,8 +623,8 @@ At minimum for planning:
 
 ```text
 Business source
-ÔåÆ Product / PRD
-ÔåÆ Requirement
+→ Product / PRD
+→ Requirement
 ```
 
 Downstream task, implementation, verification, and acceptance links MAY be absent before those stages occur.
@@ -633,7 +633,7 @@ Once a requirement is claimed as implemented, verified, or accepted, downstream 
 
 ---
 
-# Phase 8 ÔÇö A3 Architecture
+# Phase 8 — A3 Architecture
 
 Determine whether architecture is sufficiently unambiguous for the current objective.
 
@@ -697,7 +697,7 @@ If approved architecture and observed implementation conflict materially:
 
 ---
 
-# Phase 9 ÔÇö D4 Delivery Planning
+# Phase 9 — D4 Delivery Planning
 
 Once B0, P1, R2, and A3 are sufficiently ready for the current objective, determine the next bounded delivery slice.
 
@@ -775,7 +775,7 @@ Stronger verification, independent review, human approval, or domain approval MA
 
 ---
 
-# Phase 10 ÔÇö T5 Build and validate the task contract
+# Phase 10 — T5 Build and validate the task contract
 
 Create or update a task using `.agents/tasks/_template.md`.
 
@@ -914,7 +914,7 @@ If a blocking condition remains, do not publish the task as Validated/Published.
 
 ---
 
-# Phase 11 ÔÇö Produce the next valid delivery action
+# Phase 11 — Produce the next valid delivery action
 
 A single invocation MAY review implementation, establish a new accepted baseline, continue planning, and publish the next validated task when no approval or blocking boundary intervenes.
 
@@ -1141,22 +1141,22 @@ For existing repositories, prefer:
 
 ```text
 inspect current evidence
-ÔåÆ review pending work
-ÔåÆ establish accepted baseline
-ÔåÆ map evidence to protocol gates
-ÔåÆ reuse what is valid
-ÔåÆ repair only what is missing or unreliable
-ÔåÆ publish the next valid action
+→ review pending work
+→ establish accepted baseline
+→ map evidence to protocol gates
+→ reuse what is valid
+→ repair only what is missing or unreliable
+→ publish the next valid action
 ```
 
 Do not:
 
 ```text
 assume greenfield
-ÔåÆ recreate every artifact
-ÔåÆ rewrite repository structure
-ÔåÆ generate documentation for ceremony
-ÔåÆ create a task when no task is justified
+→ recreate every artifact
+→ rewrite repository structure
+→ generate documentation for ceremony
+→ create a task when no task is justified
 ```
 
 Conformance is semantic rather than formatting-based.
@@ -1171,10 +1171,10 @@ Use:
 
 ```text
 same task path
-ÔåÆ task updated
-ÔåÆ new immutable task revision
-ÔåÆ Executor
-ÔåÆ review again
+→ task updated
+→ new immutable task revision
+→ Executor
+→ review again
 ```
 
 Create separate task work when review reveals:

@@ -26,11 +26,11 @@ The canonical delivery framework remains under:
 
 ```text
 .agents/
-Ôö£ÔöÇÔöÇ AGENTS.md
-Ôö£ÔöÇÔöÇ software-workflow.md
-Ôö£ÔöÇÔöÇ context/
-Ôö£ÔöÇÔöÇ prompts/
-ÔööÔöÇÔöÇ tasks/
+├── AGENTS.md
+├── software-workflow.md
+├── context/
+├── prompts/
+└── tasks/
 ```
 
 The Codex adapter does not redefine that framework.
@@ -39,8 +39,8 @@ The Codex adapter does not redefine that framework.
 
 ```text
 runtime-adapters/codex/
-Ôö£ÔöÇÔöÇ README.md
-ÔööÔöÇÔöÇ AGENTS.md
+├── README.md
+└── AGENTS.md
 ```
 
 ### `AGENTS.md`
@@ -84,17 +84,17 @@ Typical resulting repository:
 
 ```text
 target-repository/
-Ôö£ÔöÇÔöÇ AGENTS.md
-Ôöé
-ÔööÔöÇÔöÇ .agents/
-    Ôö£ÔöÇÔöÇ AGENTS.md
-    Ôö£ÔöÇÔöÇ software-workflow.md
-    Ôö£ÔöÇÔöÇ context/
-    Ôöé   ÔööÔöÇÔöÇ project.md
-    Ôö£ÔöÇÔöÇ prompts/
-    Ôöé   ÔööÔöÇÔöÇ plan-create-task.md
-    ÔööÔöÇÔöÇ tasks/
-        ÔööÔöÇÔöÇ _template.md
+├── AGENTS.md
+│
+└── .agents/
+    ├── AGENTS.md
+    ├── software-workflow.md
+    ├── context/
+    │   └── project.md
+    ├── prompts/
+    │   └── plan-create-task.md
+    └── tasks/
+        └── _template.md
 ```
 
 The installed repository SHOULD retain `.agents/runtime-adapters/` as runtime integration source/reference material.
@@ -139,14 +139,14 @@ At minimum:
 
 ```text
 .agents/
-Ôö£ÔöÇÔöÇ AGENTS.md
-Ôö£ÔöÇÔöÇ software-workflow.md
-Ôö£ÔöÇÔöÇ context/
-Ôöé   ÔööÔöÇÔöÇ project.md
-Ôö£ÔöÇÔöÇ prompts/
-Ôöé   ÔööÔöÇÔöÇ plan-create-task.md
-ÔööÔöÇÔöÇ tasks/
-    ÔööÔöÇÔöÇ _template.md
+├── AGENTS.md
+├── software-workflow.md
+├── context/
+│   └── project.md
+├── prompts/
+│   └── plan-create-task.md
+└── tasks/
+    └── _template.md
 ```
 
 Repository-specific context, tasks, authority artifacts, and scoped context MAY extend this structure.
@@ -186,7 +186,7 @@ A configured fallback is part of the active repository instruction model and MUS
 
 ## 3. Materialize safely
 
-### Case A ÔÇö no active root Codex instruction exists
+### Case A — no active root Codex instruction exists
 
 Materialize:
 
@@ -204,7 +204,7 @@ No merge is required.
 
 Confirm that no configured fallback instruction at the repository root would be newly shadowed by this file.
 
-### Case B ÔÇö root `AGENTS.md` already exists
+### Case B — root `AGENTS.md` already exists
 
 Do NOT overwrite it blindly.
 
@@ -228,7 +228,7 @@ Ensure the merged root file still:
 
 If the existing root file materially conflicts with the canonical `.agents/` framework, resolve the conflict explicitly before treating installation as complete.
 
-### Case C ÔÇö root `AGENTS.override.md` already exists
+### Case C — root `AGENTS.override.md` already exists
 
 A root `AGENTS.md` alone is not sufficient because Codex selects the override at that directory level.
 
@@ -244,7 +244,7 @@ Then choose an explicit repository-approved resolution such as:
 
 The resulting instruction file actually selected by Codex MUST route to the canonical `.agents/AGENTS.md` contract.
 
-### Case D ÔÇö both root files exist
+### Case D — both root files exist
 
 Codex will select the root `AGENTS.override.md` rather than the root `AGENTS.md`.
 
@@ -252,7 +252,7 @@ Treat this as Case C.
 
 Do not assume that updating only `AGENTS.md` changes active Codex behavior.
 
-### Case E ÔÇö a configured fallback root instruction is active
+### Case E — a configured fallback root instruction is active
 
 Do NOT create `./AGENTS.md` without reconciling the active fallback first.
 
@@ -379,10 +379,10 @@ After installation, Superpowers SHOULD remain runtime tooling:
 
 ```text
 Superpowers
-ÔåÆ engineering methodology
+→ engineering methodology
 
 .agents/
-ÔåÆ repository delivery governance
+→ repository delivery governance
 ```
 
 Superpowers-generated technical plans, design notes, or other methodology artifacts do not automatically become approved repository authority.
@@ -421,10 +421,10 @@ Its use remains subject to:
 
 ```text
 human / approved repository authority
-ÔåÆ canonical software-workflow.md
-ÔåÆ canonical .agents/AGENTS.md
-ÔåÆ governing task when executing
-ÔåÆ approval and side-effect boundaries
+→ canonical software-workflow.md
+→ canonical .agents/AGENTS.md
+→ governing task when executing
+→ approval and side-effect boundaries
 ```
 
 A plugin may provide technical methodology, discovery, evidence, or automation.

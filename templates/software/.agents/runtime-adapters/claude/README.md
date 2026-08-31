@@ -27,11 +27,11 @@ The canonical framework remains under:
 
 ```text
 .agents/
-Ôö£ÔöÇÔöÇ AGENTS.md
-Ôö£ÔöÇÔöÇ software-workflow.md
-Ôö£ÔöÇÔöÇ context/
-Ôö£ÔöÇÔöÇ prompts/
-ÔööÔöÇÔöÇ tasks/
+├── AGENTS.md
+├── software-workflow.md
+├── context/
+├── prompts/
+└── tasks/
 ```
 
 The Claude adapter does not redefine that framework.
@@ -40,8 +40,8 @@ The Claude adapter does not redefine that framework.
 
 ```text
 runtime-adapters/claude/
-Ôö£ÔöÇÔöÇ README.md
-ÔööÔöÇÔöÇ CLAUDE.md
+├── README.md
+└── CLAUDE.md
 ```
 
 ### `CLAUDE.md`
@@ -94,21 +94,21 @@ Typical resulting repository:
 
 ```text
 target-repository/
-Ôö£ÔöÇÔöÇ CLAUDE.md
-Ôöé
-ÔööÔöÇÔöÇ .agents/
-    Ôö£ÔöÇÔöÇ AGENTS.md
-    Ôö£ÔöÇÔöÇ software-workflow.md
-    Ôö£ÔöÇÔöÇ context/
-    Ôöé   ÔööÔöÇÔöÇ project.md
-    Ôö£ÔöÇÔöÇ prompts/
-    Ôöé   ÔööÔöÇÔöÇ plan-create-task.md
-    Ôö£ÔöÇÔöÇ tasks/
-    Ôöé   ÔööÔöÇÔöÇ _template.md
-    ÔööÔöÇÔöÇ runtime-adapters/
-        ÔööÔöÇÔöÇ claude/
-            Ôö£ÔöÇÔöÇ README.md
-            ÔööÔöÇÔöÇ CLAUDE.md
+├── CLAUDE.md
+│
+└── .agents/
+    ├── AGENTS.md
+    ├── software-workflow.md
+    ├── context/
+    │   └── project.md
+    ├── prompts/
+    │   └── plan-create-task.md
+    ├── tasks/
+    │   └── _template.md
+    └── runtime-adapters/
+        └── claude/
+            ├── README.md
+            └── CLAUDE.md
 ```
 
 The copy under `.agents/runtime-adapters/claude/` is the adapter source/reference.
@@ -243,14 +243,14 @@ At minimum:
 
 ```text
 .agents/
-Ôö£ÔöÇÔöÇ AGENTS.md
-Ôö£ÔöÇÔöÇ software-workflow.md
-Ôö£ÔöÇÔöÇ context/
-Ôöé   ÔööÔöÇÔöÇ project.md
-Ôö£ÔöÇÔöÇ prompts/
-Ôöé   ÔööÔöÇÔöÇ plan-create-task.md
-ÔööÔöÇÔöÇ tasks/
-    ÔööÔöÇÔöÇ _template.md
+├── AGENTS.md
+├── software-workflow.md
+├── context/
+│   └── project.md
+├── prompts/
+│   └── plan-create-task.md
+└── tasks/
+    └── _template.md
 ```
 
 Repository-specific authority, planning artifacts, tasks, and scoped context MAY extend this structure.
@@ -353,7 +353,7 @@ Several cases may apply simultaneously.
 
 ## 5. Materialize safely
 
-### Case A ÔÇö no project CLAUDE.md bootstrap exists
+### Case A — no project CLAUDE.md bootstrap exists
 
 Materialize:
 
@@ -381,7 +381,7 @@ to:
 
 Preserve the rest of the adapter semantics.
 
-### Case B ÔÇö root `./CLAUDE.md` already exists
+### Case B — root `./CLAUDE.md` already exists
 
 Do NOT overwrite it blindly.
 
@@ -405,7 +405,7 @@ exactly once unless a different repository-approved import structure intentional
 
 Avoid copying the full `.agents/AGENTS.md` contents into `CLAUDE.md`.
 
-### Case C ÔÇö `./.claude/CLAUDE.md` already exists
+### Case C — `./.claude/CLAUDE.md` already exists
 
 Do not silently ignore it.
 
@@ -417,7 +417,7 @@ Preferred resolutions are:
 
 Do not depend on contradictory instructions in the two project locations.
 
-### Case D ÔÇö both project CLAUDE.md locations are populated
+### Case D — both project CLAUDE.md locations are populated
 
 Treat both files as active repository instruction sources until runtime verification proves otherwise.
 
@@ -431,7 +431,7 @@ Ensure:
 
 Use `/context` to verify the actual loaded project memory files rather than assuming which file Claude selected.
 
-### Case E ÔÇö `CLAUDE.local.md` or project rules conflict
+### Case E — `CLAUDE.local.md` or project rules conflict
 
 Do not overwrite personal local instructions automatically.
 
@@ -443,7 +443,7 @@ For path-scoped `.claude/rules/`, verify representative affected paths because t
 
 A local preference MUST NOT silently become approved business, product, requirement, architecture, acceptance, release, or side-effect authority.
 
-### Case F ÔÇö managed or user instructions conflict
+### Case F — managed or user instructions conflict
 
 Managed and user instructions may apply outside the repository.
 
@@ -462,7 +462,7 @@ Repository instructions MUST NOT attempt to weaken such applicable higher-level 
 
 Generic personal preferences MUST NOT silently redefine repository delivery authority.
 
-### Case G ÔÇö required project instructions are excluded
+### Case G — required project instructions are excluded
 
 Claude Code supports excluding specific project instruction files through configuration such as `claudeMdExcludes`.
 
@@ -474,7 +474,7 @@ Resolve the exclusion intentionally or document an approved alternate bootstrap.
 
 Do not claim Claude is using the canonical framework merely because the files exist on disk.
 
-### Case H ÔÇö an added directory contributes instructions
+### Case H — an added directory contributes instructions
 
 When Claude is launched with `--add-dir` and `CLAUDE_CODE_ADDITIONAL_DIRECTORIES_CLAUDE_MD=1`, the added directory can contribute Claude instruction files.
 
@@ -484,7 +484,7 @@ Inspect them for the same material conflicts as user, managed, local, nested, an
 
 If the added directory belongs to another repository, preserve repository-local authority and baseline boundaries. Cross-repository authority requires explicit approved coordination rather than implicit instruction sharing.
 
-### Case I ÔÇö launch-directory-sensitive settings or hooks
+### Case I — launch-directory-sensitive settings or hooks
 
 If developers commonly start Claude Code below the repository root, verify the effective runtime configuration from those launch directories.
 
@@ -691,22 +691,22 @@ Specifically:
 
 ```text
 Claude team task
-Ôëá .agents executable task
+≠ .agents executable task
 
 teammate plan approval
-Ôëá T5 Task Readiness
+≠ T5 Task Readiness
 
 team lead approval
-Ôëá designated repository authority
+≠ designated repository authority
 
 team task complete
-Ôëá implementation accepted
+≠ implementation accepted
 
 team permissions
-Ôëá repository side-effect authorization
+≠ repository side-effect authorization
 
 team completion
-Ôëá release approval
+≠ release approval
 ```
 
 Teammates load normal project context, but each has an independent context window.
@@ -846,10 +846,10 @@ Use them within:
 
 ```text
 applicable direct human / approved repository authority
-ÔåÆ .agents/software-workflow.md
-ÔåÆ .agents/AGENTS.md
-ÔåÆ exact governing validated task when executing
-ÔåÆ approval and side-effect boundaries
+→ .agents/software-workflow.md
+→ .agents/AGENTS.md
+→ exact governing validated task when executing
+→ approval and side-effect boundaries
 ```
 
 Project-enabled external plugins still require user installation/trust according to current Claude Code behavior.
@@ -882,13 +882,13 @@ After installation:
 
 ```text
 Superpowers
-ÔåÆ engineering methodology
+→ engineering methodology
 
 Claude skills / plugins / subagents / agent teams
-ÔåÆ runtime capability
+→ runtime capability
 
 .agents/
-ÔåÆ repository delivery governance
+→ repository delivery governance
 ```
 
 Superpowers-generated specifications, plans, design documents, or similar methodology artifacts do not automatically become approved repository authority.

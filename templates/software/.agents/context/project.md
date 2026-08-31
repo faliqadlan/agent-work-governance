@@ -173,16 +173,16 @@ Load only the scoped context materially relevant to the current work.
 
 ### Available scoped context
 
-- `<scope>` ÔåÆ `<relative-context-path>`
-- `<scope>` ÔåÆ `<relative-context-path>`
+- `<scope>` → `<relative-context-path>`
+- `<scope>` → `<relative-context-path>`
 
 Examples:
 
 ```text
-Member module       ÔåÆ modules/member/project.md
-Image Gateway       ÔåÆ modules/image-gateway/project.md
-Billing service     ÔåÆ services/billing/project.md
-External PACS       ÔåÆ integrations/pacs/project.md
+Member module       → modules/member/project.md
+Image Gateway       → modules/image-gateway/project.md
+Billing service     → services/billing/project.md
+External PACS       → integrations/pacs/project.md
 ```
 
 The hierarchy under `.agents/context/` is repository-defined.
@@ -217,17 +217,17 @@ If a gate has not yet been reliably assessed, record that fact outside the canon
 
 | Gate | Status | Evidence / authority |
 |---|---|---|
-| B0 ÔÇö Business Framing | `<pending | in_review | blocked | passed | reopened | not_applicable>` | `<reference or rationale>` |
-| P1 ÔÇö Product Definition | `<status>` | `<reference or rationale>` |
-| R2 ÔÇö Requirements Traceability | `<status>` | `<reference or rationale>` |
-| A3 ÔÇö Architecture Clarity | `<status>` | `<reference or rationale>` |
-| D4 ÔÇö Delivery Readiness | `<status>` | `<reference or rationale>` |
-| T5 ÔÇö Task Readiness | `<status>` | `<reference or rationale>` |
-| E6 ÔÇö Execution Verification | `<status>` | `<reference or rationale>` |
-| V7 ÔÇö Implementation Review | `<status>` | `<reference or rationale>` |
-| R8 ÔÇö Remediation Closure | `<status>` | `<reference or rationale>` |
-| A9 ÔÇö Baseline Acceptance | `<status>` | `<reference or rationale>` |
-| G10 ÔÇö Release Approval | `<status>` | `<reference or rationale>` |
+| B0 — Business Framing | `<pending | in_review | blocked | passed | reopened | not_applicable>` | `<reference or rationale>` |
+| P1 — Product Definition | `<status>` | `<reference or rationale>` |
+| R2 — Requirements Traceability | `<status>` | `<reference or rationale>` |
+| A3 — Architecture Clarity | `<status>` | `<reference or rationale>` |
+| D4 — Delivery Readiness | `<status>` | `<reference or rationale>` |
+| T5 — Task Readiness | `<status>` | `<reference or rationale>` |
+| E6 — Execution Verification | `<status>` | `<reference or rationale>` |
+| V7 — Implementation Review | `<status>` | `<reference or rationale>` |
+| R8 — Remediation Closure | `<status>` | `<reference or rationale>` |
+| A9 — Baseline Acceptance | `<status>` | `<reference or rationale>` |
+| G10 — Release Approval | `<status>` | `<reference or rationale>` |
 
 **Earliest unmet or materially unreliable gate:**  
 `<gate-id and reason>`

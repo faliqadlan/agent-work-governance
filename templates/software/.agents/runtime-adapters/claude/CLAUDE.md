@@ -261,12 +261,12 @@ For every material repository action:
 
 ```text
 Claude project CLAUDE.md
-ÔåÆ imported .agents/AGENTS.md
-ÔåÆ role-specific canonical loading
-ÔåÆ applicable Claude skills/plugins/subagents/agent teams/MCP
-ÔåÆ bounded work
-ÔåÆ observed evidence
-ÔåÆ canonical Planner/Reviewer loop
+→ imported .agents/AGENTS.md
+→ role-specific canonical loading
+→ applicable Claude skills/plugins/subagents/agent teams/MCP
+→ bounded work
+→ observed evidence
+→ canonical Planner/Reviewer loop
 ```
 
 When Claude runtime methodology and repository delivery governance differ, preserve legitimate repository authority and surface the conflict.

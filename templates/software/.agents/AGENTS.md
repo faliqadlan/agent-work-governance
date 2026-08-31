@@ -331,18 +331,18 @@ Use the smallest sufficient context and follow this control loop:
 
 ```text
 establish current delivery state
-ÔåÆ identify intended authority and observed evidence
-ÔåÆ load only relevant context
-ÔåÆ resolve pending implementation, review, remediation, or approval state first
-ÔåÆ establish or confirm the accepted baseline
-ÔåÆ plan from the earliest unmet or materially unreliable gate
-ÔåÆ publish a validated bounded task only when T5 is satisfied
-ÔåÆ execute against the exact baseline and governing task revision
-ÔåÆ reuse established repository patterns
-ÔåÆ verify with observed evidence
-ÔåÆ return to Planner/Reviewer orchestration
-ÔåÆ remediate, accept a new immutable baseline, repair authority, or publish the next valid task
-ÔåÆ continue development independently of release
+→ identify intended authority and observed evidence
+→ load only relevant context
+→ resolve pending implementation, review, remediation, or approval state first
+→ establish or confirm the accepted baseline
+→ plan from the earliest unmet or materially unreliable gate
+→ publish a validated bounded task only when T5 is satisfied
+→ execute against the exact baseline and governing task revision
+→ reuse established repository patterns
+→ verify with observed evidence
+→ return to Planner/Reviewer orchestration
+→ remediate, accept a new immutable baseline, repair authority, or publish the next valid task
+→ continue development independently of release
 ```
 
 When uncertain, verify the repository rather than inventing authority.
