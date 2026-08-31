@@ -110,12 +110,28 @@ try {
     Assert-CheckerFails $fixture "Runtime adapter 'antigravity' conflates retained source '.agents/rules/code-agent-workflow.md' with materialization target '.agents/rules/code-agent-workflow.md'."
 } finally { if (Test-Path -LiteralPath $fixture) { Remove-Item -Recurse -Force -LiteralPath $fixture } }
 
+function Get-ExactReadmeVersion([string]$ReadmeText, [string]$ArtifactPath) {
+    $pattern = '(?m)^\|\s*`' + [regex]::Escape($ArtifactPath) + '`\s*\|\s*([^|]+)\s*\|$'
+    $matches = [regex]::Matches($ReadmeText, $pattern)
+    if ($matches.Count -ne 1) {
+        throw "Expected exactly one README version match for '$ArtifactPath', found $($matches.Count)."
+    }
+    return [pscustomobject]@{
+        FullMatch = $matches[0].Value
+        Version = $matches[0].Groups[1].Value.Trim()
+    }
+}
+
 $fixture = New-Fixture
 try {
     $readmePath = Join-Path $fixture 'README.md'
     $readme = Get-Content -Raw -LiteralPath $readmePath
-    $readme = $readme.Replace('| `prompts/plan-create-task.md` | 2.4 |', '| `prompts/plan-create-task.md` | 2.3 |')
-    Set-Content -LiteralPath $readmePath -Value $readme
+    $entry = Get-ExactReadmeVersion $readme 'prompts/plan-create-task.md'
+    $invalidRow = $entry.FullMatch.Replace($entry.Version, "$($entry.Version)-invalid")
+    $replacedCount = 0
+    $newReadme = [regex]::Replace($readme, [regex]::Escape($entry.FullMatch), [System.Text.RegularExpressions.MatchEvaluator]{ param($m) $script:replacedCount++; return $invalidRow }, 1)
+    if ($replacedCount -ne 1) { throw "Expected replacement count 1, got $replacedCount" }
+    Set-Content -LiteralPath $readmePath -Value $newReadme
     Assert-CheckerFails $fixture "README version for 'prompts/plan-create-task.md'"
 } finally { if (Test-Path -LiteralPath $fixture) { Remove-Item -Recurse -Force -LiteralPath $fixture } }
 
