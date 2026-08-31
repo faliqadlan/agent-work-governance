@@ -1,6 +1,6 @@
 # Two-Template Agent Work Governance Design
 
-**Status:** Approved design; implementation pending written-spec review  
+**Status:** Approved design; implementation planning authorized  
 **Date:** 2026-08-31  
 **Repository:** `faliqadlan/code-agent-template`  
 **Execution branch:** `task/agent-work-governance-generalization`
@@ -12,6 +12,8 @@ Distribute two independently adoptable Agent Work Governance packages: a Softwar
 ## Constraints and authority
 
 The governing task revision is `8d88cc7de580e3d1f320cd7670f96fa5712a0877`. The accepted Software behavior baseline is `7c4f648207bd6f65f4afdf917547635feef2c56d`; the superseded WIP `43e53bde5774ce5d4e3fbf4a447c3ae2f2b3e183` is evidence and reusable work, not an acceptance baseline. The corrected architecture is represented by `269b0c1171d8b028d9f0e42ea0f11fbefd2c8fa3`.
+
+This design specification is supporting implementation-design evidence subordinate to governing task revision `8d88cc7de580e3d1f320cd7670f96fa5712a0877`. If this specification conflicts materially with the governing task, implementation planning must stop and reconcile the conflict rather than silently following the specification.
 
 The implementation must preserve published history, avoid force-pushes and history rewrites, leave `main` unchanged, and make no release, publication, issue, PR, merge, or repository-rename change.
 
