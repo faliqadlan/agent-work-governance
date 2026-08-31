@@ -1,10 +1,10 @@
 ---
 title: Plan, Review, and Create Validated Task
 document_id: AGENT-PROMPT-PLAN-001
-version: 2.5
+version: 2.4
 status: approved-template
 language: en-US
-last_updated: 2026-08-31
+last_updated: 2026-08-30
 role:
   - Planner
   - Reviewer
@@ -19,7 +19,7 @@ scope:
   - delivery-objective selection
   - validated task creation
   - execution-ready Executor Launcher output
-authority_note: This prompt is a reusable Planner/Reviewer delivery-orchestration procedure. It is not repository authority and MUST NOT override .agents/AGENTS.md, .agents/core-governance.md, a selected profile, approved repository authority, the governing task revision, or observed repository evidence.
+authority_note: This prompt is a reusable Planner/Reviewer delivery-orchestration procedure. It is not repository authority and MUST NOT override .agents/AGENTS.md, .agents/software-workflow.md, approved repository authority, the governing task revision, or observed repository evidence.
 ---
 
 # Plan, Review, and Create Validated Task
@@ -62,10 +62,9 @@ plan-create-task.md
 Before material Planner/Reviewer work, load:
 
 1. `.agents/AGENTS.md`;
-2. `.agents/core-governance.md`;
-3. the selected profile (`.agents/software-workflow.md` for Software or `.agents/profiles/scientific-governance.md` for Scientific);
-4. `.agents/context/project.md`;
-5. only the scoped context materially relevant to the current work;
+2. `.agents/software-workflow.md`;
+3. `.agents/context/project.md`;
+4. only the scoped context materially relevant to the current work;
 5. applicable repository authority;
 6. active or recently completed task files and their exact governing revisions;
 7. current implementation evidence and repository state;

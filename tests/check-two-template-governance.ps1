@@ -390,6 +390,50 @@ function Copy-And-Check([string]$SourcePackageDir, [string]$PackageName) {
 Copy-And-Check $softwareDir 'Software'
 Copy-And-Check $scientificDir 'Scientific'
 
+# 8. Check for stale references in live root governance (AWG-R3)
+function Check-RootGovernanceStaleReferences([string]$RepositoryRoot) {
+    $rootAgentsDir = Join-Path $RepositoryRoot '.agents'
+    if (-not (Test-Path -LiteralPath $rootAgentsDir -PathType Container)) { return }
+
+    $allFiles = Get-ChildItem -Recurse -File -LiteralPath $rootAgentsDir
+    $forbiddenRootPatterns = @(
+        'core-governance.md',
+        'profiles/',
+        'selected profile',
+        'profile_selection',
+        'transition-inventory',
+        'transition governance',
+        'during generalization'
+    )
+
+    foreach ($file in $allFiles) {
+        $relFromAgents = $file.FullName.Substring($rootAgentsDir.Length).TrimStart('\', '/').Replace('\', '/')
+        if ($relFromAgents.StartsWith('tasks/') -and $file.Name -ne '_template.md') {
+            continue
+        }
+
+        $content = Get-Content -Raw -LiteralPath $file.FullName
+        foreach ($pattern in $forbiddenRootPatterns) {
+            $isMatch = $false
+            if ($pattern -eq 'selected profile') {
+                $isMatch = [regex]::IsMatch($content, '(?i)selected\s+profile')
+            } elseif ($pattern -eq 'transition governance') {
+                $isMatch = [regex]::IsMatch($content, '(?i)transition\s+governance')
+            } elseif ($pattern -eq 'during generalization') {
+                $isMatch = [regex]::IsMatch($content, '(?i)during\s+generalization')
+            } else {
+                $isMatch = $content.Contains($pattern)
+            }
+
+            if ($isMatch) {
+                Add-Error "Root governance file '.agents/$relFromAgents' contains forbidden stale reference '$pattern'."
+            }
+        }
+    }
+}
+
+Check-RootGovernanceStaleReferences $root
+
 if ($errors.Count -gt 0) {
     $errors | ForEach-Object { Write-Output "ERROR: $_" }
     exit 1

@@ -71,7 +71,7 @@ Existing repositories MUST reuse valid artifacts and implementation evidence rat
 
 ## Intended authority map
 
-Map the intended-authority responsibilities defined by `.agents/core-governance.md` and the selected profile to the actual approved sources used by this repository.
+Map the intended-authority responsibilities defined by `.agents/software-workflow.md` to the actual approved sources used by this repository.
 
 Physical file locations and artifact structure are repository-defined.
 
@@ -209,7 +209,7 @@ This section is an orientation summary, not a replacement for authoritative deli
 
 Record only gates that have been verified from repository evidence.
 
-Use the canonical gate states from the selected profile (Software uses `.agents/software-workflow.md`; Scientific uses `.agents/profiles/scientific-governance.md`):
+Use the canonical gate states from `.agents/software-workflow.md`:
 
 `pending`, `in_review`, `blocked`, `passed`, `reopened`, or `not_applicable` with recorded rationale.
 

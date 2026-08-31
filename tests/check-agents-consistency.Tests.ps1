@@ -127,10 +127,12 @@ function New-RepoFixture {
     New-Item -ItemType Directory -Path $fixture | Out-Null
     $softDir = Join-Path $fixture 'templates/software/.agents'
     $sciDir = Join-Path $fixture 'templates/scientific/.agents'
+    $rootAgentsDir = Join-Path $fixture '.agents'
     New-Item -ItemType Directory -Path (Join-Path $fixture 'templates/software') -Force | Out-Null
     New-Item -ItemType Directory -Path (Join-Path $fixture 'templates/scientific') -Force | Out-Null
     Copy-Item -Recurse -LiteralPath (Join-Path $root 'templates/software/.agents') -Destination $softDir
     Copy-Item -Recurse -LiteralPath (Join-Path $root 'templates/scientific/.agents') -Destination $sciDir
+    Copy-Item -Recurse -LiteralPath (Join-Path $root '.agents') -Destination $rootAgentsDir
     Copy-Item -LiteralPath (Join-Path $root 'README.md') -Destination (Join-Path $fixture 'README.md')
     return $fixture
 }
@@ -267,6 +269,74 @@ try {
     Set-Content -LiteralPath $readmePath -Value $mutatedReadme
 
     Assert-RepoCheckerFails $fixture "README contains multiple (2) mirrored version entries for Software canonical artifact '.agents/prompts/plan-create-task.md'"
+} finally { if (Test-Path -LiteralPath $fixture) { Remove-Item -Recurse -Force -LiteralPath $fixture } }
+
+# ==============================================================================
+# AWG-R3: Live Root Governance Stale References Regression Tests
+# ==============================================================================
+
+# 17. AWG-R3: Stale core-governance.md reference in live root prompt should fail
+$fixture = New-RepoFixture
+try {
+    $promptPath = Join-Path $fixture '.agents/prompts/plan-create-task.md'
+    $origPrompt = Get-Content -Raw -LiteralPath $promptPath
+    $mutatedPrompt = $origPrompt.Replace('2. `.agents/software-workflow.md`;', "2. `.agents/core-governance.md`;`n3. `.agents/software-workflow.md`;")
+    Set-Content -LiteralPath $promptPath -Value $mutatedPrompt
+
+    Assert-RepoCheckerFails $fixture "Root governance file '.agents/prompts/plan-create-task.md' contains forbidden stale reference 'core-governance.md'."
+
+    # Restore valid prompt
+    Set-Content -LiteralPath $promptPath -Value $origPrompt
+    $result = Invoke-RepoChecker $fixture
+    if ($result.ExitCode -ne 0) { throw "Restored root plan-create-task.md should pass. Output=$($result.Output)" }
+} finally { if (Test-Path -LiteralPath $fixture) { Remove-Item -Recurse -Force -LiteralPath $fixture } }
+
+# 18. AWG-R3: Stale profiles/ reference in live root project context should fail
+$fixture = New-RepoFixture
+try {
+    $projectPath = Join-Path $fixture '.agents/context/project.md'
+    $origProject = Get-Content -Raw -LiteralPath $projectPath
+    $mutatedProject = $origProject.Replace('Use the canonical gate states from `.agents/software-workflow.md`:', "Use the canonical gate states from `.agents/profiles/scientific-governance.md`:")
+    Set-Content -LiteralPath $projectPath -Value $mutatedProject
+
+    Assert-RepoCheckerFails $fixture "Root governance file '.agents/context/project.md' contains forbidden stale reference 'profiles/'."
+
+    # Restore valid project context
+    Set-Content -LiteralPath $projectPath -Value $origProject
+    $result = Invoke-RepoChecker $fixture
+    if ($result.ExitCode -ne 0) { throw "Restored root project.md should pass. Output=$($result.Output)" }
+} finally { if (Test-Path -LiteralPath $fixture) { Remove-Item -Recurse -Force -LiteralPath $fixture } }
+
+# 19. AWG-R3: Stale selected profile reference in live root runtime adapter should fail
+$fixture = New-RepoFixture
+try {
+    $codexAgentsPath = Join-Path $fixture '.agents/runtime-adapters/codex/AGENTS.md'
+    $origCodexAgents = Get-Content -Raw -LiteralPath $codexAgentsPath
+    $mutatedCodexAgents = $origCodexAgents.Replace('2. `.agents/software-workflow.md`;', '2. `.agents/core-governance.md` and the relevant selected profile;')
+    Set-Content -LiteralPath $codexAgentsPath -Value $mutatedCodexAgents
+
+    Assert-RepoCheckerFails $fixture "Root governance file '.agents/runtime-adapters/codex/AGENTS.md' contains forbidden stale reference 'selected profile'."
+
+    # Restore valid adapter
+    Set-Content -LiteralPath $codexAgentsPath -Value $origCodexAgents
+    $result = Invoke-RepoChecker $fixture
+    if ($result.ExitCode -ne 0) { throw "Restored root codex AGENTS.md should pass. Output=$($result.Output)" }
+} finally { if (Test-Path -LiteralPath $fixture) { Remove-Item -Recurse -Force -LiteralPath $fixture } }
+
+# 20. AWG-R3: Stale transition-inventory role in live root manifest should fail
+$fixture = New-RepoFixture
+try {
+    $manifestPath = Join-Path $fixture '.agents/manifest.json'
+    $origManifest = Get-Content -Raw -LiteralPath $manifestPath
+    $mutatedManifest = $origManifest.Replace('"manifest_role": "repository-governance"', '"manifest_role": "transition-inventory"')
+    Set-Content -LiteralPath $manifestPath -Value $mutatedManifest
+
+    Assert-RepoCheckerFails $fixture "Root governance file '.agents/manifest.json' contains forbidden stale reference 'transition-inventory'."
+
+    # Restore valid manifest
+    Set-Content -LiteralPath $manifestPath -Value $origManifest
+    $result = Invoke-RepoChecker $fixture
+    if ($result.ExitCode -ne 0) { throw "Restored root manifest.json should pass. Output=$($result.Output)" }
 } finally { if (Test-Path -LiteralPath $fixture) { Remove-Item -Recurse -Force -LiteralPath $fixture } }
 
 Write-Output 'All consistency checker and two-template governance regression tests passed.'

@@ -1,12 +1,13 @@
 {
   "schema_version": 3,
-  "manifest_role": "transition-inventory",
+  "manifest_role": "repository-governance",
   "package_root": ".agents",
   "path_base": "repository-root",
   "authority": {
     "is_authoritative": false,
     "canonical_contract": ".agents/AGENTS.md",
-    "note": "This manifest inventories the repository-internal transition files during Agent Work Governance generalization. Distributable packages are located in templates/software/.agents/ and templates/scientific/.agents/."
+    "normative_protocol": ".agents/software-workflow.md",
+    "note": "This manifest inventories the repository-internal governance files for the Agent Work Governance distribution repository. Distributable packages are located in templates/software/.agents/ and templates/scientific/.agents/."
   },
   "distribution_packages": {
     "software": {

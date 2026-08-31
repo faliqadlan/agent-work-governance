@@ -1,8 +1,8 @@
-<!-- runtime-adapter: antigravity | version: 1.3 | status: approved-template -->
+<!-- runtime-adapter: antigravity | version: 1.2 | status: approved-template -->
 
 # Repository AI Delivery Bootstrap for Antigravity
 
-This workspace rule connects Antigravity to the repository-local, runtime-neutral Agent Work Governance contract under `.agents/`.
+This workspace rule connects Antigravity to the repository-local, runtime-neutral software-delivery contract under `.agents/`.
 
 Configure this rule as **Always On** when materialized at:
 
@@ -22,7 +22,7 @@ This rule is a runtime bootstrap only. It MUST NOT redefine or weaken the canoni
 
 Use `.agents/AGENTS.md` for role routing and progressive loading.
 
-`.agents/core-governance.md` is the domain-neutral core; load the relevant profile, including `.agents/software-workflow.md` for Software work.
+`.agents/software-workflow.md` remains the normative delivery protocol.
 
 When acting as Planner or Reviewer, follow the canonical loading rules and use:
 
@@ -74,7 +74,7 @@ Use relevant installed capabilities when they materially improve the current res
 Runtime methodology remains subordinate to:
 
 1. applicable human and approved repository authority;
-2. `.agents/core-governance.md` and the relevant selected profile;
+2. `.agents/software-workflow.md`;
 3. `.agents/AGENTS.md`;
 4. the exact governing validated task when executing;
 5. applicable approval, permission, security, privacy, and side-effect boundaries.

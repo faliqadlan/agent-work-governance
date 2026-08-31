@@ -1,20 +1,20 @@
 ---
-title: Agent Work Governance Repository Contract (Transition)
+title: Agent Work Governance Repository Contract
 document_id: AGENTS-CONTRACT-001
-version: 1.4
+version: 1.5
 status: approved-reference
 language: en-US
 last_updated: 2026-08-31
 scope:
-  - repository-internal transition governance for code-agent-template
+  - repository-internal governance for code-agent-template
   - distribution of standalone software and scientific governance templates
-  - planning, execution, and review boundaries for active governing task
+  - planning, execution, and review boundaries
 authority_note: Approved repository authority governs intended behavior. Observed repository evidence governs claims about current implementation reality. Neither silently overrides the other.
 ---
 
-# Agent Work Governance Repository Contract (Internal Transition)
+# Agent Work Governance Repository Contract
 
-This root `.agents/` package serves as the **repository-internal transition governance** contract for `code-agent-template` during its generalization into the Agent Work Governance distribution model.
+This root `.agents/` package serves as the **repository-internal governance** contract for `code-agent-template` (distributing the Agent Work Governance framework).
 
 The distributable, standalone template packages are located at:
 
@@ -23,11 +23,12 @@ The distributable, standalone template packages are located at:
 
 A target repository adopts exactly one selected package as its own root `.agents/` directory.
 
-## Transition authority and active governing task
+## Repository authority and delivery protocol
 
 Active delivery work in this repository is governed by:
 
-- `.agents/tasks/agent-work-governance-generalization.md`
+- `.agents/software-workflow.md` (normative software delivery protocol for repository work)
+- `.agents/tasks/` (bounded governing tasks)
 
 Planning, execution, and review follow the repository authority model, quality gates, task contracts, and evidence rules.
 
