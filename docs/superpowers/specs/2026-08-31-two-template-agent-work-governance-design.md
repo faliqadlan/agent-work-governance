@@ -1,6 +1,6 @@
 # Two-Template Agent Work Governance Design
 
-**Status:** Approved design; implementation planning authorized  
+**Status:** Approved design; implementation planning authorized
 **Date:** 2026-08-31  
 **Repository:** `faliqadlan/code-agent-template`  
 **Execution branch:** `task/agent-work-governance-generalization`
