@@ -2,7 +2,7 @@
 title: Generalize the Repository into Agent Work Governance
 document_id: AGENT-TASK-WORK-GOV-001
 version: 1.1
-status: Planning Required
+status: Validated/Published
 language: en-US
 last_updated: 2026-08-31
 scope:
@@ -20,7 +20,7 @@ This is a bounded delivery contract for transforming the current software-specif
 
 **Task title:** `Generalize the Repository into Agent Work Governance`
 **Task path:** `.agents/tasks/agent-work-governance-generalization.md`
-**Task contract state:** `Planning Required`
+**Task contract state:** `Validated/Published`
 **Delivery objective / Work Package / MVP:** `AGENT-TASK-WORK-GOV-001`
 **Owner / designated planning authority:** `Planner/Reviewer under the repository's accepted authority model`
 
